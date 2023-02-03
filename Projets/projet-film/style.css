@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;1,300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1{
+    margin-top: 10px;
+    text-align: center;
+}
+
+#ConteneurGeneral{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#ListeFilms{
+    display: flex;
+    width: 90%;
+    height: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 1cm auto 0.7cm;
+}
+
+i{
+    color: rebeccapurple;
+}
+
+.card{
+    display: flex;
+    width: 250px;
+    flex-direction: column;
+    height: max-content;
+    border-radius: 10px;
+    box-shadow: 2px 2px 20px black ;
+    flex-grow: 1;
+}
+
+
+
+.infos{
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    margin: auto;
+}
+
+.Title,.Time, .Real, .Details{
+    margin: auto auto 5px;
+}
+
+t{
+    font-weight: bold;
+}
+
+.Title{
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.Time{
+    display: flex;
+    width: 90%;
+    height: max-content;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-img{
+    width: 100%;
+    height: 70%;
+    justify-content: center;
+    aspect-ratio: 31/42;
+    object-fit: cover;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    background-color: rebeccapurple;
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+a:hover{
+    background-color: mediumpurple;
+}
+
+#Film{
+    display: flex;
+    width: 600px;
+    height: max-content;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: mediumpurple 1px 1px 15px;
+    border-radius: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 30px;
+    margin: 20px auto;
+}
+
+#Film h1{
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    color: rebeccapurple;
+}
+
+#real, #Film p, .acteurs{
+    margin: auto;
+    text-align: justify;
+}
+
+#Film img{
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+#real{
+    font-size: 110%;
+    margin-bottom: 8px;
+}
+
+#Avec{
+    font-size: 102%;
+}
+
+.acteurs{
+    font-style: italic;
+}
+
+#Film .Time{
+    width: 40%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#Synopsis{
+    text-indent: 1cm;
+}
+
+#Film a{
+    width: 80%;
+    margin: 20px auto auto;
+}
+
+#Erreur{
+    display: flex;
+    text-align: center;
+    color: darkred;
+    font-weight: bold;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+}
+
+#Erreur i{
+    color: red;
+    font-size: 100px;
+}
+
+#Erreur h1{
+    font-size: 50px;
+}

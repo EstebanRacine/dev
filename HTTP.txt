@@ -1,0 +1,6 @@
+En php il est possible de récupérer les informations liées à une 
+requête HTTP émise par un client.
+
+Ces informations sont disponibles dans un tableau directement 
+accessible dans le code PHP ($_SERVER) C'est un tableau associatif.
+

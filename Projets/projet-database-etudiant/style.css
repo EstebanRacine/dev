@@ -1,0 +1,159 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: grid;
+    width: 100%;
+    min-height: 100vh;
+    margin: auto;
+    grid-template-rows: 150px 1fr 150px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+    background-color: mediumspringgreen;
+}
+
+header, footer{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    background-color: mediumspringgreen;
+}
+
+header{
+    grid-column: 1/-1;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-family: "Cooper Black", sans-serif;
+}
+main{
+    display: grid;
+    height: 100%;
+    width: 80%;
+    grid-row: 2/-2;
+    grid-column: 1/-1;
+    grid-template-rows: repeat(auto-fit, minmax(200px, max-content));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 10px;
+    margin: auto;
+    background-color: mediumslateblue;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.card{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border: black 1px solid;
+    border-radius: 10px;
+    padding: 10px 5px;
+    font-size: 15px;
+    background-color: white;
+}
+
+.nom, .prenom, .birth, .infos{
+    display: flex;
+    justify-content: center;
+    padding: 3px 0;
+}
+
+.card p{
+    width: max-content;
+}
+
+.infos{
+    background-color: mediumpurple;
+    border-radius: 10px;
+}
+
+.infos a{
+    text-decoration: none;
+    width: 100%;
+    color: white;
+
+    text-align: center;
+
+}
+
+footer{
+    grid-column: 1/-1;
+    grid-row: -1/-2;
+    color: black;
+    bottom: 100vh;
+}
+
+/* !! Pour détails !! */
+
+#detail{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(10px, 100%));
+    min-width: 40vh;
+    max-width: 50vh;
+}
+
+.details{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    grid-area: 1/1/-1/-1;
+}
+
+.image{
+    width: 60%;
+    height: 40%;
+    margin-top: 10px;
+
+}
+
+.image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 250/200;
+    border-radius: 10px;
+    padding-top: 5px;
+}
+
+
+.ecrit{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 45%;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    margin: 20px auto auto;
+    font-size: 17px;
+    font-family: Dubai , sans-serif;
+}
+
+.name{
+    text-transform: uppercase;
+    font-size: 30px;
+    font-family: "Arial Black", sans-serif;
+    text-align: center;
+}
+
+.contact{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+
+.contact p{
+    width: 50%;
+    text-align: center;
+}

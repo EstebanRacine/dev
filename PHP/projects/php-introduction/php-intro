@@ -1,0 +1,24 @@
+<?php
+echo "Bonjour le monde";
+$prenom = "Esteban";
+$startPhrase = "Bonjour, je m'appelle";
+echo "\n";
+echo $prenom;
+$DateDuJour = date("d-m-Y");
+$Heure = date("H:i");
+echo "\n";
+echo $DateDuJour;
+echo "\n";
+echo $Heure;
+$Tableau = array(
+    "foo" => "bar",
+    "bar" => "foo",
+);
+print_r($Tableau);
+echo $Tableau["foo"];
+echo PHP_EOL;
+echo PHP_EOL;
+echo implode("\n", $Tableau);
+echo PHP_EOL;
+$startPhrase .= " ".$prenom;
+echo $startPhrase;
