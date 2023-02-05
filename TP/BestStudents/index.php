@@ -26,6 +26,7 @@ $student = getStudentByID(1);
         <a href="index.php">Accueil</a>
         <a href="create-student.php">Ajouter un étudiant</a>
         <a href="contact.php">Contact</a>
+
 </nav>
 
 <main></main>

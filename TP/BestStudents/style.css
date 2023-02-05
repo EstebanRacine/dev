@@ -2,40 +2,64 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Dubai, sans-serif;
+    color: white;
 }
 
 .container{
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    min-height: 100vh;
+    background-color: black;
 }
 
 header{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    background-color: black;
-    color: white;
+    padding-bottom: 20px;
+    padding-top: 10px;
 }
 
 header > h1{
     height: max-content;
     margin-top: auto;
     margin-bottom: auto;
+    padding-left: 10px;
+    text-align: center;
 }
 
 nav{
     display: grid;
     grid-template-rows: max-content;
     grid-template-columns: repeat(3, 1fr);
-
 }
-
-
 
 nav a{
     display: block;
     width: max-content;
-    justify-self: center;
+    justify-self: center ;
+    text-decoration: none;
+    font-size: 1.5em;
+    transition: all 0.5s;
 }
+
+nav a:after{
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: gold;
+    width: 100%;
+    transform: scale(0);
+    transition: transform 0.5s ease-in-out;
+}
+
+nav a:hover::after{
+    transform: scale(1);
+}
+
+nav a:hover{
+    color: #ffd700;
+}
+
