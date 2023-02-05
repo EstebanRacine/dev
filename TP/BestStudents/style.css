@@ -149,6 +149,18 @@ nav a:hover{
     margin: 30px auto;
 }
 
+@media screen and (min-width: 500px) and (max-width: 900px){
+    .details{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width: 500px){
+    .details{
+        width: 90%;
+    }
+}
+
 .details img{
     grid-area: 1/1/2/-1;
     width: 100%;
