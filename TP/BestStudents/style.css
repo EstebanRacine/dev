@@ -138,10 +138,68 @@ nav a:hover{
 /*Content for Details*/
 
 .details{
-
+    min-width: 220px;
+    width: 30%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    grid-template-rows: 1fr 1fr 1.3fr 1.5fr 0.7fr 1fr;
+    height: 100vh;
+    border: 3px solid gold;
+    border-radius: 10px;
+    margin: 30px auto;
 }
 
+.details img{
+    grid-area: 1/1/2/-1;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    margin: auto;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
 
+.nomDetail{
+    grid-row: 2/3;
+    grid-column: 1/-1;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.birthDetail{
+    grid-column: 1/-1;
+    grid-row: 3/4;
+}
+
+.adresseDetails{
+    grid-column: 1/-1;
+    grid-row: 4/5;
+}
+
+.contactDetails{
+    grid-row: 5/6;
+    grid-column: 1/-1;
+    padding-top: 15px;
+}
+
+.details i{
+    color: gold;
+    font-size: 1.2em;
+}
+
+.details > *{
+    display: flex;
+    flex-direction: column;
+}
+
+.details > * > *{
+    margin: auto;
+}
+
+.telDetails, .mailDetails{
+    height: max-content;
+    margin: auto auto;
+}
 
 
 /*Footer*/
