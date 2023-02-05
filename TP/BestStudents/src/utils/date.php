@@ -1,6 +1,6 @@
 <?php
 
-function writeBirth(string $date_n):string{
+function writeBirthLetter(string $date_n):string{
     $annee = substr($date_n, 0, 4);
     $month = substr($date_n, 5, 2);
     if($month == "01"){
@@ -30,6 +30,13 @@ function writeBirth(string $date_n):string{
     }
     $day = substr($date_n, -2);
     return $day." ".$month." ".$annee;
+}
+
+function writeBirthNumber(string $date_n):string{
+    $annee = substr($date_n, 0, 4);
+    $month = substr($date_n, 5, 2);
+    $day = substr($date_n, -2);
+    return $day."/".$month."/".$annee;
 }
 
 function isMajeur(string $date_n){
