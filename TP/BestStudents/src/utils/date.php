@@ -1,6 +1,6 @@
 <?php
 
-function naissance(string $date_n):string{
+function writeBirth(string $date_n):string{
     $annee = substr($date_n, 0, 4);
     $month = substr($date_n, 5, 2);
     if($month == "01"){
@@ -32,4 +32,19 @@ function naissance(string $date_n):string{
     return $day." ".$month." ".$annee;
 }
 
-print_r(naissance("2004-01-08"));
+function isMajeur(string $date_n){
+    $timestampLimiteMajeur = time()-567993600;
+    $timestampBirth = strtotime($date_n);
+    if ($timestampBirth < $timestampLimiteMajeur){
+        return True;
+    }
+    return False;
+}
+
+function getAge(string $date_n){
+    $date_n = date_create($date_n);
+    $now = date_create(date('Y-m-d'));
+    $differenceDate = date_diff($date_n, $now);
+    return $differenceDate->format("%y");
+}
+
