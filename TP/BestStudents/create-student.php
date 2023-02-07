@@ -37,9 +37,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $email = $_POST['email'];
     }
 
-    if(isset($_POST['tel'])){
+    if(empty(trim($_POST['tel']))){
+        $erreurs['tel'] = "Veuillez remplir le champs Telephone";
+    }else{
         $tel = $_POST['tel'];
     }
+
+
     if (isset($_POST['adresse'])){
         $adresse = $_POST['adresse'];
     }
@@ -66,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 } else {
                     $extensionFichier = pathinfo($nomFichier, 4);
                     print_r($extensionFichier);
-                    if ($extensionFichier != "png" and $extensionFichier != "jpg" and $extensionFichier != "jepg") {
+                    if ($extensionFichier != "png" and $extensionFichier != "jpg" and $extensionFichier != "jepg" and $extensionFichier != "JPEG" and $extensionFichier != "JPG" and $extensionFichier != "PNG") {
                         $erreurs['image'] = "Le fichier n'a pas la bonne extension (png, jpg ou jpeg)";
                     } else {
                         $nomFichier = uniqid() . "." . $extensionFichier;
@@ -165,8 +169,16 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             }
             ?>
 
-            <label for="tel">Telephone</label>
+            <label for="tel">Telephone <span class="Rouge">*</span></label>
             <input type="text" name="tel" id="tel" value="<?= $tel ?>"">
+            <?php
+            if (isset($erreurs['tel'])){
+                $erreur = $erreurs['tel'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
+            }
+            ?>
 
             <label for="adresse">Adresse</label>
             <input type="text" name="adresse" id="adresse" value="<?= $adresse ?>"">
