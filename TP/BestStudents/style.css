@@ -230,8 +230,20 @@ nav a:hover{
 .creation input{
     display: block;
     margin-top: 3px;
-    margin-bottom: 20px;
+    margin-bottom: 3px;
     width: 100%;
+    color: black;
+}
+
+.creation p{
+    margin-bottom: 20px;
+}
+
+.inputImage{
+    background-color: gold;
+    height: max-content;
+    border-radius: 3px;
+    padding: 2px 2px;
 }
 
 .submit{

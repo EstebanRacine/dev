@@ -1,6 +1,7 @@
 <?php
 include "src/utils/requetes.php";
 
+
 $prenom = NULL;
 $nom = NULL;
 $date_naissance=NULL;
@@ -48,29 +49,32 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }else{
         $ville = $_POST['ville'];
     }
-
+    print_r($_FILES["image"]);
     if (empty($erreurs)) {
-        if (empty($_FILES["photo"]['name'])) {
+        if (empty($_FILES["image"]['name'])) {
             $image = "src/images/students/student.jpg";
         } else {
-            $nomFichier = $_FILES["photo"]['name'];
-            $typeFichier = $_FILES["photo"]['type'];
-            $tmpFichier = $_FILES["photo"]['tmp_name'];
-            $tailleFichier = $_FILES["photo"]['size'];
+            $nomFichier = $_FILES["image"]['name'];
+            $typeFichier = $_FILES["image"]['type'];
+            $tmpFichier = $_FILES["image"]['tmp_name'];
+            $tailleFichier = $_FILES["image"]['size'];
             if (!str_contains($typeFichier, "image")) {
                 $erreurs['image'] = "Le fichier n'est pas une image";
             } else {
                 if ($tailleFichier > 600000) {
-                    $erreurs['image'] = "L'image est gros grosse";
+                    $erreurs['image'] = "L'image est gros lourde";
                 } else {
                     $extensionFichier = pathinfo($nomFichier, 4);
-                    if ($extensionFichier != "png" or $extensionFichier != "jpg" or $extensionFichier != "jepg") {
+                    print_r($extensionFichier);
+                    if ($extensionFichier != "png" and $extensionFichier != "jpg" and $extensionFichier != "jepg") {
                         $erreurs['image'] = "Le fichier n'a pas la bonne extension (png, jpg ou jpeg)";
                     } else {
                         $nomFichier = uniqid() . "." . $extensionFichier;
                         $image = "src/images/students/$nomFichier";
                         if (!move_uploaded_file($tmpFichier, "src/images/students/$nomFichier")){
                             $erreurs['image'] = "Erreur lors de l'upload";
+                        }else{
+                            move_uploaded_file($tmpFichier, "src/images/students/$nomFichier");
                         }
                     }
                 }
@@ -80,7 +84,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if(empty($erreurs)){
         addStudent($prenom, $nom, $date_naissance, $email, $tel, $adresse, $ville, $image);
-        header('Location : index.php');
+        header('Location: index.php');
     }
 
 }
@@ -115,7 +119,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     </nav>
 
     <main class="creation">
-        <form action="" method="post">
+        <form action="" method="post" enctype="multipart/form-data">
 
             <label for="prenom">Prénom <span class="Rouge">*</span></label>
             <input type="text" name="prenom" id="prenom" value="<?= $prenom ?>">
@@ -123,6 +127,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             if (isset($erreurs['prenom'])){
                 $erreur = $erreurs['prenom'];
                 echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
             }
             ?>
 
@@ -132,6 +138,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             if (isset($erreurs['nom'])){
                 $erreur = $erreurs['nom'];
                 echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
             }
             ?>
 
@@ -141,6 +149,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             if (isset($erreurs['date_naissance'])){
                 $erreur = $erreurs['date_naissance'];
                 echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
             }
             ?>
 
@@ -150,6 +160,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             if (isset($erreurs['email'])){
                 $erreur = $erreurs['email'];
                 echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
             }
             ?>
 
@@ -165,15 +177,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             if (isset($erreurs['ville'])){
                 $erreur = $erreurs['ville'];
                 echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
             }
             ?>
 
             <label for="image">Image <span class="Rouge">**</span></label>
-            <input type="file" name="image" id="image" value="<?= $image ?>">
+            <input type="file" name="image" id="image" class="inputImage">
             <?php
             if (isset($erreurs['image'])){
                 $erreur = $erreurs['image'];
                 echo "<p class='Rouge'> $erreur </p>";
+            }else{
+                echo "<p> </p>";
             }
             ?>
 

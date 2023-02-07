@@ -19,10 +19,10 @@ function getStudentById($id){
 
 }
 
-function addStudent(string $prenom, string $nom, string $date_naissance, string $email, string $tel, string $adresse, string $ville):bool{
+function addStudent(string $prenom, string $nom, string $date_naissance, string $email, string $tel, string $adresse, string $ville, string $image):bool{
     $connexion = createConnection();
-    $requeteSQL = "INSERT INTO etudiants(prenom, nom, date_naissance, email, tel, adresse, ville)
- VALUES(:prenom, :nom, :date_naissance, :email, :tel, :adresse, :ville)";
+    $requeteSQL = "INSERT INTO etudiants(prenom, nom, date_naissance, email, tel, adresse, ville, img)
+ VALUES(:prenom, :nom, :date_naissance, :email, :tel, :adresse, :ville, :image)";
     $requete = $connexion->prepare($requeteSQL);
     $requete->bindValue("prenom", $prenom);
     $requete->bindValue("nom", $nom);
@@ -31,5 +31,6 @@ function addStudent(string $prenom, string $nom, string $date_naissance, string 
     $requete->bindValue("tel", $tel);
     $requete->bindValue("adresse", $adresse);
     $requete->bindValue("ville", $ville);
+    $requete->bindValue("image", $image);
     return $requete -> execute();
 }
