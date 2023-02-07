@@ -46,18 +46,18 @@ nav a{
     width: max-content;
     justify-self: center ;
     text-decoration: none;
-    font-size: 1.5em;
+    font-size: 1.6em;
     transition: all 0.5s;
 }
 
 nav a:after{
     content: "";
     display: block;
-    height: 1px;
+    height: 2px;
     background-color: gold;
     width: 100%;
     transform: scale(0);
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s;
 }
 
 nav a:hover::after{
@@ -211,6 +211,48 @@ nav a:hover{
 .telDetails, .mailDetails{
     height: max-content;
     margin: auto auto;
+}
+
+/*Creation-etudaint*/
+
+.creation{
+    width: 300px;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    margin: 25px auto auto;
+}
+
+.creation label{
+    color: white;
+}
+
+.creation input{
+    display: block;
+    margin-top: 3px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.submit{
+    background-color: gold;
+    border: none;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 1.3em;
+    transition: box-shadow 0.3s;
+}
+
+.submit:hover{
+    box-shadow: 1px 1px 10px 3px white;
+    cursor: pointer;
+}
+
+#stars{
+    font-size: 13px;
+    margin: auto auto 20px;
+    width: 95%;
+    text-align: justify;
 }
 
 

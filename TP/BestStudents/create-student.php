@@ -1,3 +1,95 @@
+<?php
+include "src/utils/requetes.php";
+
+$prenom = NULL;
+$nom = NULL;
+$date_naissance=NULL;
+$email = NULL;
+$tel = NULL;
+$adresse = NULL;
+$ville = NULL;
+$image = NULL;
+$erreurs = [];
+
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    if(empty(trim($_POST['prenom']))){
+        $erreurs['prenom'] = "Veuillez remplir le champs Prénom";
+    } else{
+        $prenom = $_POST['prenom'];
+    }
+
+    if(empty(trim($_POST['nom']))){
+        $erreurs['nom'] = "Veuillez remplir lez champs Nom";
+    } else{
+        $nom = $_POST['nom'];
+    }
+
+    if (empty(trim($_POST['date_naissance']))){
+        $erreurs['date_naissance'] = "Veuillez remplir le champs Date de naissance";
+    } else{
+        $date_naissance = $_POST['date_naissance'];
+    }
+
+    if (empty(trim($_POST['email']))){
+        $erreurs['email'] = "Veuillez remplir le champs Email";
+    }else{
+        $email = $_POST['email'];
+    }
+
+    if(isset($_POST['tel'])){
+        $tel = $_POST['tel'];
+    }
+    if (isset($_POST['adresse'])){
+        $adresse = $_POST['adresse'];
+    }
+
+    if (empty(trim($_POST['ville']))){
+        $erreurs['ville'] = "Veuillez remplir le champs Ville";
+    }else{
+        $ville = $_POST['ville'];
+    }
+
+    if (empty($erreurs)) {
+        if (empty($_FILES["photo"]['name'])) {
+            $image = "src/images/students/student.jpg";
+        } else {
+            $nomFichier = $_FILES["photo"]['name'];
+            $typeFichier = $_FILES["photo"]['type'];
+            $tmpFichier = $_FILES["photo"]['tmp_name'];
+            $tailleFichier = $_FILES["photo"]['size'];
+            if (!str_contains($typeFichier, "image")) {
+                $erreurs['image'] = "Le fichier n'est pas une image";
+            } else {
+                if ($tailleFichier > 600000) {
+                    $erreurs['image'] = "L'image est gros grosse";
+                } else {
+                    $extensionFichier = pathinfo($nomFichier, 4);
+                    if ($extensionFichier != "png" or $extensionFichier != "jpg" or $extensionFichier != "jepg") {
+                        $erreurs['image'] = "Le fichier n'a pas la bonne extension (png, jpg ou jpeg)";
+                    } else {
+                        $nomFichier = uniqid() . "." . $extensionFichier;
+                        $image = "src/images/students/$nomFichier";
+                        if (!move_uploaded_file($tmpFichier, "src/images/students/$nomFichier")){
+                            $erreurs['image'] = "Erreur lors de l'upload";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if(empty($erreurs)){
+        addStudent($prenom, $nom, $date_naissance, $email, $tel, $adresse, $ville, $image);
+        header('Location : index.php');
+    }
+
+}
+
+
+?>
+
+
+
 <!doctype html>
 <html lang="fr">
 <head>
@@ -22,7 +114,77 @@
 
     </nav>
 
-    <main>
+    <main class="creation">
+        <form action="" method="post">
+
+            <label for="prenom">Prénom <span class="Rouge">*</span></label>
+            <input type="text" name="prenom" id="prenom" value="<?= $prenom ?>">
+            <?php
+            if (isset($erreurs['prenom'])){
+                $erreur = $erreurs['prenom'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }
+            ?>
+
+            <label for="nom">Nom <span class="Rouge">*</span></label>
+            <input type="text" name="nom" id="nom" value="<?= $nom ?>">
+            <?php
+            if (isset($erreurs['nom'])){
+                $erreur = $erreurs['nom'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }
+            ?>
+
+            <label for="date_naissance">Date de naissance <span class="Rouge">*</span></label>
+            <input type="date" name="date_naissance" id="date_naissance" value="<?= $date_naissance ?>">
+            <?php
+            if (isset($erreurs['date_naissance'])){
+                $erreur = $erreurs['date_naissance'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }
+            ?>
+
+            <label for="email">Email <span class="Rouge">*</span></label>
+            <input type="text" name="email" id="email" value="<?= $email ?>">
+            <?php
+            if (isset($erreurs['email'])){
+                $erreur = $erreurs['email'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }
+            ?>
+
+            <label for="tel">Telephone</label>
+            <input type="text" name="tel" id="tel" value="<?= $tel ?>"">
+
+            <label for="adresse">Adresse</label>
+            <input type="text" name="adresse" id="adresse" value="<?= $adresse ?>"">
+
+            <label for="ville">Ville <span class="Rouge">*</span></label>
+            <input type="text" name="ville" id="ville" value="<?= $ville ?>">
+            <?php
+            if (isset($erreurs['ville'])){
+                $erreur = $erreurs['ville'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }
+            ?>
+
+            <label for="image">Image <span class="Rouge">**</span></label>
+            <input type="file" name="image" id="image" value="<?= $image ?>">
+            <?php
+            if (isset($erreurs['image'])){
+                $erreur = $erreurs['image'];
+                echo "<p class='Rouge'> $erreur </p>";
+            }
+            ?>
+
+            <input type="submit" value="Envoyer" class="submit">
+
+        </form>
+
+        <div id="stars">
+            <p>(<span class="Rouge">*</span> : Les astérisques signifient que le champ est obligatoire)</p>
+            <p>(<span class="Rouge">**</span> : Si aucune image n'a été donnée une image de base sera attribuée )</p>
+        </div>
 
 
     </main>
