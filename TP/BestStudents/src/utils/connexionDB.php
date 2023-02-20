@@ -1,7 +1,7 @@
 <?php
 
 const DB_HOST = "localhost:3306";
-const DB_NAME = "db_etudiant";
+const DB_NAME = "db_etudiants";
 const DB_USER = "root";
 const DB_PASSWORD = "";
 
@@ -16,3 +16,4 @@ function createConnection():PDO{
         die("Erreur : ".$erreur->getMessage());
     }
 }
+
