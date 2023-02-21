@@ -66,7 +66,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 $erreurs['image'] = "Le fichier n'est pas une image";
             } else {
                 if ($tailleFichier > 600000) {
-                    $erreurs['image'] = "L'image est gros lourde";
+                    $erreurs['image'] = "L'image est trop lourde";
                 } else {
                     $extensionFichier = pathinfo($nomFichier, 4);
                     print_r($extensionFichier);

@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container{
+    width: 500px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.form-container h1{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.form-container form > *{
+    display: block;
+    margin: auto auto 10px;
+    width: max-content;
+}
+
+.form-container img{
+    width: 25%;
+    margin: auto;
+}
