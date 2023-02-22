@@ -43,3 +43,10 @@ function getAllPromo():array{
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getPromoNameById($id){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("SELECT nom_promo FROM promotions WHERE id_promo = $id");
+    $requete -> execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
+}

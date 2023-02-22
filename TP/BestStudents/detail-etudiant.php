@@ -14,6 +14,10 @@ $tel = $etudiant['tel'];
 $adresse = $etudiant['adresse'];
 $ville = strtoupper($etudiant['ville']);
 $age = getAge($etudiant['date_naissance']);
+$promo = getPromoNameById($etudiant['promo_etudiant'])['nom_promo'];
+if (empty($promo)){
+    $promo = "Cet étudiant n'a pas de promotion";
+}
 ?>
 
 
@@ -64,6 +68,11 @@ $age = getAge($etudiant['date_naissance']);
                 <i class="fa-solid fa-house"></i>
                 <p><?= $adresse?></p>
                 <p><?= $ville?></p>
+            </div>
+            <div class="promotionEtudiant">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <p><?= $promo ?></p>
+
             </div>
             <div class="contactDetails">
                 <h2>CONTACT</h2>
