@@ -355,8 +355,12 @@ option{
     cursor: pointer;
     margin: 20px auto auto;
     border: 1px solid gold;
+    transition: all 0.5s;
 }
 
+.recherche input:hover{
+    box-shadow: 1px 1px 10px 3px white;
+}
 
 /*Footer*/
 
