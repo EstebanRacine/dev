@@ -328,7 +328,7 @@ option{
 
 .promo p{
     width: max-content;
-    margin: auto auto;
+    margin: 8px auto ;
     font-weight: bold;
 }
 
