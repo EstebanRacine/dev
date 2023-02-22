@@ -147,7 +147,7 @@ nav a:hover{
     height: 100vh;
     border: 3px solid gold;
     border-radius: 10px;
-    margin: 0 auto 30px;
+    margin: 25px auto 30px;
 }
 
 @media screen and (min-width: 500px) and (max-width: 900px){
