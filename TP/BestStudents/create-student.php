@@ -12,6 +12,8 @@ $ville = NULL;
 $image = NULL;
 $erreurs = [];
 
+$listePromo = getAllPromo();
+
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     if(empty(trim($_POST['prenom']))){
         $erreurs['prenom'] = "Veuillez remplir le champs Prénom";
@@ -42,7 +44,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }else{
         $tel = $_POST['tel'];
     }
-
 
     if (isset($_POST['adresse'])){
         $adresse = $_POST['adresse'];
@@ -86,7 +87,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }
 
     if(empty($erreurs)){
-        addStudent($prenom, $nom, $date_naissance, $email, $tel, $adresse, $ville, $image);
+        $promoEtudiant = $_POST['promo'];
+        addStudent($prenom, $nom, $date_naissance, $email, $tel, $adresse, $ville, $image, $promoEtudiant);
         header('Location: index.php');
     }
 
@@ -170,6 +172,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             <label for="tel">Telephone <span class="Rouge">*</span></label>
             <input type="text" name="tel" id="tel" value="<?= $tel ?>"">
+
             <?php
             if (isset($erreurs['tel'])){
                 $erreur = $erreurs['tel'];
@@ -181,6 +184,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
             <label for="adresse">Adresse</label>
             <input type="text" name="adresse" id="adresse" value="<?= $adresse ?>"">
+            <br>
+
 
             <label for="ville">Ville <span class="Rouge">*</span></label>
             <input type="text" name="ville" id="ville" value="<?= $ville ?>">
@@ -192,6 +197,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 echo "<p> </p>";
             }
             ?>
+
+            <label for="promo">Promotion</label>
+            <select name="promo" id="promo">
+                <option value="">Aucune promotion</option>
+                <?php
+                foreach($listePromo as $promo){
+                    echo "<option value=".$promo['id_promo'].">".$promo['nom_promo']."</option>";
+                }
+                ?>
+
+            </select>
+
+
 
             <label for="image">Image <span class="Rouge">**</span></label>
             <input type="file" name="image" id="image" class="inputImage">

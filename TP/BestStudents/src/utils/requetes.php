@@ -19,10 +19,10 @@ function getStudentById($id){
 
 }
 
-function addStudent(string $prenom, string $nom, string $date_naissance, string $email, string $tel, string $adresse, string $ville, string $image):bool{
+function addStudent(string $prenom, string $nom, string $date_naissance, string $email, string $tel, string $adresse, string $ville, string $image, int $promo):bool{
     $connexion = createConnection();
-    $requeteSQL = "INSERT INTO etudiants(prenom, nom, date_naissance, email, tel, adresse, ville, img)
- VALUES(:prenom, :nom, :date_naissance, :email, :tel, :adresse, :ville, :image)";
+    $requeteSQL = "INSERT INTO etudiants(prenom, nom, date_naissance, email, tel, adresse, ville, img, promo_etudiant)
+ VALUES(:prenom, :nom, :date_naissance, :email, :tel, :adresse, :ville, :image, :promo)";
     $requete = $connexion->prepare($requeteSQL);
     $requete->bindValue("prenom", $prenom);
     $requete->bindValue("nom", $nom);
@@ -32,5 +32,14 @@ function addStudent(string $prenom, string $nom, string $date_naissance, string 
     $requete->bindValue("adresse", $adresse);
     $requete->bindValue("ville", $ville);
     $requete->bindValue("image", $image);
+    $requete->bindValue("promo", $promo);
     return $requete -> execute();
+}
+
+
+function getAllPromo():array{
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM promotions");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
 }

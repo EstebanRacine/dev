@@ -234,7 +234,7 @@ nav a:hover{
     color: white;
 }
 
-.creation input{
+.creation input, select{
     display: block;
     margin-top: 3px;
     margin-bottom: 3px;
@@ -246,11 +246,16 @@ nav a:hover{
     margin-bottom: 20px;
 }
 
-.inputImage{
+option{
+    color: black;
+}
+
+.inputImage, select{
     background-color: gold;
     height: max-content;
     border-radius: 3px;
     padding: 2px 2px;
+    margin-bottom: 10px;
 }
 
 .submit{

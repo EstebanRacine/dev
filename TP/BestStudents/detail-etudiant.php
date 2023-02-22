@@ -2,6 +2,7 @@
 include "src/utils/requetes.php";
 include "src/utils/date.php";
 include "src/utils/fonctions.php";
+
 $etudiantID = $_GET['id'];
 $etudiant = getStudentByID($etudiantID)[0];
 $nom = strtoupper($etudiant['nom']);
