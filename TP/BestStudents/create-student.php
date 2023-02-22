@@ -36,8 +36,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     if (empty(trim($_POST['email']))){
         $erreurs['email'] = "Veuillez remplir le champs Email";
     }else{
+        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $erreurs['email'] = "L'email n'est pas valide";
+        }
         $email = $_POST['email'];
     }
+
 
     if(empty(trim($_POST['tel']))){
         $erreurs['tel'] = "Veuillez remplir le champs Telephone";
