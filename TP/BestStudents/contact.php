@@ -18,6 +18,7 @@
     <nav>
         <a href="index.php">Accueil</a>
         <a href="create-student.php">Ajouter un étudiant</a>
+        <a href="listePromo.php">Liste des promotions</a>
         <a href="contact.php">Contact</a>
 
     </nav>

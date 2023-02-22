@@ -14,8 +14,9 @@ $tel = $etudiant['tel'];
 $adresse = $etudiant['adresse'];
 $ville = strtoupper($etudiant['ville']);
 $age = getAge($etudiant['date_naissance']);
-$promo = getPromoNameById($etudiant['promo_etudiant'])['nom_promo'];
-if (empty($promo)){
+if(isset(getPromoNameById($etudiant['promo_etudiant'])['nom_promo'])){
+    $promo = getPromoNameById($etudiant['promo_etudiant'])['nom_promo'];
+}else{
     $promo = "Cet étudiant n'a pas de promotion";
 }
 ?>
@@ -44,6 +45,7 @@ if (empty($promo)){
     <nav>
         <a href="index.php">Accueil</a>
         <a href="create-student.php">Ajouter un étudiant</a>
+        <a href="listePromo.php">Liste des promotions</a>
         <a href="contact.php">Contact</a>
 
     </nav>

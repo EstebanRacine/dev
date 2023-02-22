@@ -46,7 +46,16 @@ function getAllPromo():array{
 
 function getPromoNameById($id){
     $connexion = createConnection();
-    $requete = $connexion->prepare("SELECT nom_promo FROM promotions WHERE id_promo = $id");
+    $requete = $connexion->prepare("SELECT nom_promo FROM promotions WHERE id_promo = :id");
+    $requete->bindValue("id", $id);
     $requete -> execute();
     return $requete->fetch(PDO::FETCH_ASSOC);
+}
+
+function getStudentsInPromo($id_promo){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("SELECT * FROM etudiants WHERE promo_etudiant = :id_promo");
+    $requete->bindValue("id_promo", $id_promo);
+    $requete ->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
