@@ -48,7 +48,7 @@ function isMajeur(string $date_n){
     return False;
 }
 
-function getAge(string $date_n){
+function getAge(string $date_n):int{
     $date_n = date_create($date_n);
     $now = date_create(date('Y-m-d'));
     $differenceDate = date_diff($date_n, $now);

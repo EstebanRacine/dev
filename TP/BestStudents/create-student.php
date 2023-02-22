@@ -53,7 +53,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }else{
         $ville = $_POST['ville'];
     }
-    print_r($_FILES["image"]);
     if (empty($erreurs)) {
         if (empty($_FILES["image"]['name'])) {
             $image = "src/images/students/student.jpg";
