@@ -1,5 +1,7 @@
 <?php
 
+include_once "requetes.php";
+
 function writeBirthLetter(string $date_n):string{
     $annee = substr($date_n, 0, 4);
     $month = substr($date_n, 5, 2);
@@ -39,15 +41,6 @@ function writeBirthNumber(string $date_n):string{
     return $day."/".$month."/".$annee;
 }
 
-function isMajeur(string $date_n){
-    $timestampLimiteMajeur = time()-567993600;
-    $timestampBirth = strtotime($date_n);
-    if ($timestampBirth < $timestampLimiteMajeur){
-        return True;
-    }
-    return False;
-}
-
 function getAge(string $date_n):int{
     $date_n = date_create($date_n);
     $now = date_create(date('Y-m-d'));
@@ -55,3 +48,35 @@ function getAge(string $date_n):int{
     return $differenceDate->format("%y");
 }
 
+function ActuellementHoraires():bool{
+    $time = time();
+    $jour = date('N', $time);
+    $heure = date("H", $time);
+    $minute = date("i", $time);
+    $heureTotal = $heure.':'.$minute;
+    $heureTotal = strtotime($heureTotal);
+    $horaires = getAllHoraires();
+    foreach ($horaires as $day){
+        if($day['id_jour']==$jour){
+            if(!isset($day['ouvertureMatin']) and !isset($day['ouvertureApMidi'])){
+                return False;
+            }
+            if (isset($day['ouvertureMatin'])){
+                $heureOuv = strtotime(str_replace('h', ':', $day['ouvertureMatin']));
+                $heureFerm = strtotime(str_replace('h', ':', $day['fermetureMatin']));
+                if ($heureTotal < $heureFerm and $heureTotal>=$heureOuv){
+                    return True;
+                }
+            }
+
+            if (isset($day['ouvertureApMidi'])){
+                $heureOuv = strtotime(str_replace('h', ':', $day['ouvertureApMidi']));
+                $heureFerm = strtotime(str_replace('h', ':', $day['fermetureApMidi']));
+                if ($heureTotal < $heureFerm and $heureTotal>=$heureOuv){
+                    return True;
+                }
+            }
+        }
+    }
+    return False;
+}

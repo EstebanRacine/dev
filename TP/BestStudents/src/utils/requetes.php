@@ -1,5 +1,5 @@
 <?php
-include "src/utils/connexionDB.php";
+include "connexionDB.php";
 
 function getAllStudents():array|bool{
     $connexion = createConnection();
@@ -57,5 +57,12 @@ function getStudentsInPromo($id_promo){
     $requete = $connexion->prepare("SELECT * FROM etudiants WHERE promo_etudiant = :id_promo");
     $requete->bindValue("id_promo", $id_promo);
     $requete ->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getAllHoraires(){
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM horaires");
+    $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }

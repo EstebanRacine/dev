@@ -345,7 +345,7 @@ option{
     height: max-content;
 }
 
-.recherche input{
+.recherche input, #sendMail{
     display: block;
     background-color: black;
     color: gold;
@@ -358,9 +358,112 @@ option{
     transition: all 0.5s;
 }
 
-.recherche input:hover{
+.recherche input:hover, #sendMail:hover{
     box-shadow: 1px 1px 10px 3px white;
 }
+
+/*CONTACT*/
+
+.Contact{
+    display: grid;
+    grid-template-rows: 350px 550px;
+    grid-template-columns: 3fr 1.2fr;
+    margin-top: 50px;
+}
+
+.infos{
+    display: flex;
+    flex-direction: column;
+}
+
+.infos h3, .formContact h3{
+    width: max-content;
+    font-size: 2em;
+    color: gold;
+    margin: auto auto 20px;
+}
+
+.infosContact{
+    display: flex;
+    flex-direction: column;
+}
+
+.infosContact > *{
+    width: max-content;
+    margin: auto;
+    font-size: 1.3em;
+    padding-bottom: 5px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.infosContact i{
+    padding-right: 5px;
+}
+
+.infosContact a, .infosContact a i{
+    transition: all 0.3s;
+}
+
+.infosContact a:hover, .infosContact a:hover i{
+    color: gold;
+    text-shadow: gold 1px 1px 1px ;
+}
+
+.orgaInfos{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+
+.orgaInfos iframe{
+    width: 100%;
+    height: 100%;
+}
+
+.horaires{
+    height: 100%;
+    width: max-content;
+    margin: 20px auto auto;
+    background-color: #232323;
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.horaires p, .horaires h1, .horaires h3{
+    width: max-content;
+    margin: auto;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+
+}
+
+.formContact{
+    grid-column: 1/-1;
+}
+
+.formContact h3{
+    margin-top: 20px;
+}
+
+.formContact form{
+    width: 50%;
+    margin: auto;
+}
+
+.formContact input{
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    color: black;
+}
+
+#message{
+    height: 10vh;
+    margin-bottom: 20px;
+}
+
 
 /*Footer*/
 
@@ -386,3 +489,4 @@ footer{
 .FondReseau:hover svg path{
     fill: gold;
 }
+
