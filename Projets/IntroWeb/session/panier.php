@@ -5,9 +5,14 @@ session_start();
 function viderPanier():void{
     $_SESSION['panier'] = [];
 }
-
-$produits = $_SESSION['produits'];
-print_r($_POST);
+print_r($_SESSION['panier']);
+$produits = [
+    "p1" => ['nom' => "Produit 1", 'prix' => 5.55],
+    "p2" => ['nom' => "Produit 2", 'prix' => 3.99],
+    "p3" => ['nom' => "Produit 3", 'prix' => 24],
+    "p4" => ['nom' => "Produit 4", 'prix' => 59.99],
+    "p5" => ['nom' => "Produit 5", 'prix' => 12]
+];
 if($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['viderPanier'])) {
         viderPanier();
@@ -19,7 +24,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         }
     }
 }
-
 ?>
 
 <!doctype html>
@@ -34,7 +38,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 <body>
 <h1>Mon Panier</h1>
 <?php
-sort($_SESSION["panier"]);
+ksort($_SESSION["panier"]);
 $prixTotal = 0;
 foreach ($_SESSION['panier'] as $produit){
     $id = $produit['id'];

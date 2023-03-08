@@ -10,7 +10,7 @@ $produits = [
     "p5" => ['nom' => "Produit 5", 'prix' => 12]
 ];
 
-$_SESSION['produits'] = $produits;
+
 
 if(!isset($_SESSION['panier'])){
     $_SESSION['panier'] = [];

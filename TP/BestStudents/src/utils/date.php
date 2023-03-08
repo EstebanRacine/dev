@@ -80,3 +80,9 @@ function ActuellementHoraires():bool{
     }
     return False;
 }
+
+function getNumberJour(){
+    $time = time();
+    $jour = date('N', $time);
+    return $jour;
+}

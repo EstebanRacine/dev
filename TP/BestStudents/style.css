@@ -366,7 +366,7 @@ option{
 
 .Contact{
     display: grid;
-    grid-template-rows: 350px 550px;
+    grid-template-rows: 350px 600px;
     grid-template-columns: 3fr 1.2fr;
     margin-top: 50px;
 }
@@ -439,6 +439,11 @@ option{
 
 }
 
+.h3Mail{
+    padding-top: 50px;
+}
+
+
 .formContact{
     grid-column: 1/-1;
 }
@@ -452,7 +457,7 @@ option{
     margin: auto;
 }
 
-.formContact input{
+.formContact input, textarea{
     display: block;
     width: 100%;
     margin-bottom: 10px;

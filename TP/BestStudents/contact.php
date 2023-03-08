@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         $erreur['mail'] = "Veuillez entrer votre adresse mail.";
     }else{
         if (filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)){
-            $nom = $_POST['nom'];
+            $mail = $_POST['mail'];
         }else{
             $erreur['mail'] = "L'adresse mail n'est pas valide.";
         }
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     }
 
     if ($erreur == []){
-        if(mail("esteban.racineecole@gmail.com", $objet, $message, "From : ".$mail)) {
+        if(mail("esteban.racine2004@gmail.com", $objet, $message, "From: ".$mail)) {
             $nom = NULL;
             $mail = NULL;
             $message = NULL;
@@ -104,7 +104,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
                 echo "<h3 class='Rouge'>Actuellement femé</h3>";
             }
                 foreach ($horaires as $jour){
-                    echo "<p>".$jour['lib_jour']." : ";
+                    $nbJour = getNumberJour();
+                    if ($jour['id_jour']==$nbJour){
+                        if (ActuellementHoraires()){
+                            echo "<p class='Vert'>".$jour['lib_jour']." : ";
+                        }else {
+                            echo "<p class='Rouge'>" . $jour['lib_jour'] . " : ";
+                        }
+                    }else {
+                        echo "<p>" . $jour['lib_jour'] . " : ";
+                    }
                     if (!isset($jour['ouvertureMatin']) and !isset($jour['ouvertureApMidi'])){
                         echo "<span class='Rouge'>Fermé</span></p>";
                     }else{
@@ -127,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
         <div class="formContact">
 
-            <h3>Envoyez nous un message !</h3>
+            <h3 class="h3Mail">Envoyez nous un message !</h3>
 
             <form method="post">
 
@@ -154,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
                 <input name="objet" id="objet" type="text" value="<?=$objet?>">
 
                 <label for="message">Votre message <span class="Rouge">*</span></label>
-                <input type="text" name="message" id="message" value="<?=$message?>">
+                <textarea name="message" id="message"> <?=$message?></textarea>
 
                 <?php
                 if (isset($erreur['message'])){
@@ -172,7 +181,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         </div>
 
     </main>
-
     <?php
     include "src/footer.php";
     ?>
