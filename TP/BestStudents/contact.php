@@ -60,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
         $mail = NULL;
         $message = NULL;
         $objet = NULL;
+        $prenom = NULL;
 
 //            CHANGEMENT APRES ENVOI
 

@@ -101,12 +101,25 @@ function getContactNonTraites(){
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getContactTraites(){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("SELECT * FROM contact WHERE traitementContact = 1");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 function traiterContact($id){
     $connexion = createConnection();
     $requete = $connexion->prepare("UPDATE contact SET traitementContact = 1 WHERE idContact = :id");
     $requete ->bindValue('id', $id);
     $requete->execute();
 }
+
+
+
+
+
 
 function addUser($nom, $prenom, $login, $mdp, $acces){
     $sel = "BestStudentsForever";
@@ -130,11 +143,6 @@ function verifUser($login, $mdp){
     $requete = $requete->fetch(PDO::FETCH_ASSOC);
     if (!empty($requete)){
         $mdpSauv = $requete['mdpUser'];
-        print_r($mdpSauv);
-        echo PHP_EOL;
-        print_r(md5($mdp.$sel));
-        echo PHP_EOL;
-
         if($mdpSauv == md5($mdp.$sel)){
             return true;
         }else{
@@ -145,6 +153,3 @@ function verifUser($login, $mdp){
     }
 }
 
-
-addUser("Shin", "Higaku", "higakus", "azerty123", 1);
-var_dump(verifUser("higakus", "azerty123"));

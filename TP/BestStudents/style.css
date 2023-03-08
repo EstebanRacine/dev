@@ -150,14 +150,14 @@ nav a:hover{
     margin: 25px auto 30px;
 }
 
-@media screen and (min-width: 500px) and (max-width: 900px){
+@media screen and (min-width: 500px) and (max-width: 1110px){
     .details{
         width: 60%;
     }
 
     nav{
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, max-content);
+        grid-template-rows: repeat(5, max-content);
         grid-gap: 5px;
     }
 }
@@ -169,7 +169,7 @@ nav a:hover{
 
     nav{
         grid-template-columns: 1fr;
-        grid-template-rows: repeat(4, max-content);
+        grid-template-rows: repeat(5, max-content);
         grid-gap: 5px;
     }
 }
@@ -345,7 +345,7 @@ option{
     height: max-content;
 }
 
-.recherche input, #sendMail{
+.recherche input, #sendMail, #submitFormDemande{
     display: block;
     background-color: black;
     color: gold;
@@ -358,7 +358,7 @@ option{
     transition: all 0.5s;
 }
 
-.recherche input:hover, #sendMail:hover{
+.recherche input:hover, #sendMail:hover, #submitFormDemande:hover{
     box-shadow: 1px 1px 10px 3px white;
 }
 
@@ -470,6 +470,132 @@ option{
     margin-bottom: 20px;
 }
 
+/*GESTION DES DEMANDES*/
+
+/*connexionUser*/
+
+.connexionGestion{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    align-items: center;
+}
+
+.formConnexionGestion{
+    width: 30%;
+    height: max-content;
+    border: 3px solid gold;
+    border-radius: 10px;
+    margin: auto;
+    padding: 20px 10px;
+}
+
+.formConnexionGestion input{
+    display: block;
+    background-color: #232323;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    transition: all 0.5s;
+    border: none;
+    border-radius: 3px;
+    position: relative;
+    height: 2em;
+    padding: 2px;
+}
+
+.formConnexionGestion input:focus {
+    outline: none;
+}
+
+.barre{
+    width: 100%;
+    position: relative;
+    display: block;
+}
+
+.barre:before, .barre:after{
+    content: "";
+    width: 0;
+    transition: all 0.5s;
+    position: absolute;
+    bottom: 6px;
+    height: 2px;
+    background-color: gold;
+}
+
+.barre:before{
+    left: 50%;
+}
+
+.barre:after{
+    right: 50%;
+}
+
+input:focus ~ .barre:before, input:focus ~ .barre:after{
+    width: 50%;
+}
+
+.center{
+    width: 50%;
+    margin: auto;
+}
+
+#connexionSubmitGestion{
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+
+#connexionSubmitGestion:hover{
+    box-shadow: 1px 1px 10px 3px gold;
+}
+
+/*affichage liste*/
+
+.listeDemandes{
+
+}
+
+#traitement{
+    width: max-content;
+}
+
+.listeDemandes form{
+    margin-left: 5%;
+    margin-top: 20px;
+}
+
+#submitFormDemande{
+    margin: 5px 0 0;
+}
+
+.ligneDemande{
+    width: 90%;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 2fr 1fr 1fr;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: white 1px solid;
+}
+
+.nomColonnesDemandes{
+    margin-top: 25px;
+}
+
+.ligneDemande a{
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.ligneDemande a:hover{
+    color: gold;
+    border-bottom: gold 2px solid;
+}
 
 /*Footer*/
 
