@@ -597,6 +597,46 @@ input:focus ~ .barre:before, input:focus ~ .barre:after{
     border-bottom: gold 2px solid;
 }
 
+/*DEMANDE UNIQUE*/
+.demandeUnique{
+    width: 50%;
+    margin: 50px auto auto;
+}
+
+.demandeUnique h1{
+    color: gold;
+}
+
+.demandeUnique h2{
+    color: gold;
+    font-size: 1.5em;
+    padding-bottom: 10px;
+    border-bottom: gold 2px solid;
+}
+
+.demandeUnique h3{
+    font-size: 1.3em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.demandeUnique p{
+    margin-bottom: 15px;
+}
+
+.demandeUnique input{
+    background-color: #232323;
+    width: 20vw;
+    height: 30px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.demandeUnique input:hover{
+    box-shadow: 1px 1px 8px 3px white;
+    border-radius: 10px;
+}
+
 /*Footer*/
 
 footer{

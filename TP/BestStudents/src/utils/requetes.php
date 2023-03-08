@@ -91,7 +91,7 @@ function getContactById($id){
     $requete = $connexion->prepare($requeteSQL);
     $requete->bindValue("id", $id);
     $requete->execute();
-    return $requete->fetchAll(PDO::FETCH_ASSOC);
+    return $requete->fetch(PDO::FETCH_ASSOC);
 }
 
 function getContactNonTraites(){
