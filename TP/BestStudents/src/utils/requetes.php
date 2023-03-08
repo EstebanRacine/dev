@@ -16,7 +16,6 @@ function getStudentById($id){
     $requete->bindValue("id", $id);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
-
 }
 
 function addStudent(string $prenom, string $nom, string $date_naissance, string $email, string $tel, string $adresse, string $ville, string $image, int $promo):bool{
@@ -66,3 +65,86 @@ function getAllHoraires(){
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function createContact($nom, $prenom, $mail, $objet, $message){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("INSERT INTO contact(nomContact, prenomContact, mailContact, objetContact, messageContact)
+VALUES(:nom, :prenom, :mail, :objet, :message)");
+    $requete->bindValue('nom', $nom);
+    $requete->bindValue('prenom', $prenom);
+    $requete->bindValue('mail', $mail);
+    $requete->bindValue('objet', $objet);
+    $requete->bindValue('message', $message);
+    $requete->execute();
+}
+
+function getAllContact(){
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM contact");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getContactById($id){
+    $connexion = createConnection();
+    $requeteSQL = "SELECT * FROM contact WHERE idContact = :id";
+    $requete = $connexion->prepare($requeteSQL);
+    $requete->bindValue("id", $id);
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getContactNonTraites(){
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM contact WHERE traitementContact = 0");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function traiterContact($id){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("UPDATE contact SET traitementContact = 1 WHERE idContact = :id");
+    $requete ->bindValue('id', $id);
+    $requete->execute();
+}
+
+function addUser($nom, $prenom, $login, $mdp, $acces){
+    $sel = "BestStudentsForever";
+    $connexion = createConnection();
+    $requete = $connexion->prepare("INSERT INTO utilisateurs(nomUser, prenomUser, loginUser, mdpUser, accesAdmin)
+VALUES (:nom, :prenom,:login, :mdp, :acces)");
+    $requete->bindValue('nom', $nom);
+    $requete->bindValue('prenom', $prenom);
+    $requete->bindValue('login', $login);
+    $requete->bindValue('mdp', md5($mdp.$sel));
+    $requete->bindValue('acces', $acces);
+    $requete->execute();
+}
+
+function verifUser($login, $mdp){
+    $sel = "BestStudentsForever";
+    $connexion = createConnection();
+    $requete = $connexion->prepare("SELECT mdpUser FROM utilisateurs WHERE loginUser = :login");
+    $requete->bindValue('login', $login);
+    $requete->execute();
+    $requete = $requete->fetch(PDO::FETCH_ASSOC);
+    if (!empty($requete)){
+        $mdpSauv = $requete['mdpUser'];
+        print_r($mdpSauv);
+        echo PHP_EOL;
+        print_r(md5($mdp.$sel));
+        echo PHP_EOL;
+
+        if($mdpSauv == md5($mdp.$sel)){
+            return true;
+        }else{
+            return "Le mot de passe n'est pas valide.";
+        }
+    }else{
+        return "Le login n'est pas reconnu.";
+    }
+}
+
+
+addUser("Shin", "Higaku", "higakus", "azerty123", 1);
+var_dump(verifUser("higakus", "azerty123"));

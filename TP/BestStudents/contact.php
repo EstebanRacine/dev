@@ -2,9 +2,11 @@
 
 include_once "src/utils/date.php";
 include_once "src/utils/requetes.php";
+include_once "src/utils/fonctions.php";
 
 $horaires = getAllHoraires();
 $nom = NULL;
+$prenom = NULL;
 $mail = NULL;
 $message = NULL;
 $objet = NULL;
@@ -21,6 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     }else{
         $nom = $_POST['nom'];
     }
+
+    if (empty(trim($_POST['prenom']))){
+        $erreur['prenom'] = "Veuillez entrer un prénom.";
+    }else{
+        $prenom = $_POST['prenom'];
+    }
+
     if (empty(trim($_POST['mail']))){
         $erreur['mail'] = "Veuillez entrer votre adresse mail.";
     }else{
@@ -44,16 +53,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     }
 
     if ($erreur == []){
-        $headers["from"]= $mail ;
-        if(mail("esteban.racine2004@gmail.com", $objet, $message, $headers)) {
-            $nom = NULL;
-            $mail = NULL;
-            $message = NULL;
-            $objet = NULL;
-            echo '<script type="text/javascript">window.alert("' . $alert . '");</script>';
-        }else{
-            $erreur['envoi'] = "Erreur lors de l'envoi du message, veuilez réessayer.";
-        }
+        createContact($nom, $prenom, $mail, $objet, $message);
+        mailConfirmation($nom, $prenom, $mail);
+
+        $nom = NULL;
+        $mail = NULL;
+        $message = NULL;
+        $objet = NULL;
+
+//            CHANGEMENT APRES ENVOI
+
+        echo '<script type="text/javascript">window.alert("' . $alert . '");</script>';
     }
 
 }
@@ -153,6 +163,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
                 }
                 ?>
 
+                <label for="">Prénom <span class="Rouge">*</span></label>
+                <input name="prenom" id="prenom" type="text" value="<?=$prenom?>">
+
+                <?php
+                if (isset($erreur['prenom'])){
+                    echo "<p class='Rouge'>".$erreur['prenom']."</p>";
+                }
+                ?>
 
                 <label for="mail">Adresse Mail <span class="Rouge">*</span></label>
                 <input type="text" name="mail" id="mail" value="<?=$mail?>">
