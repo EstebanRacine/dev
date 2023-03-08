@@ -9,6 +9,9 @@ $mail = NULL;
 $message = NULL;
 $objet = NULL;
 $alert = "Votre message a bien été envoyé.";
+$headers = [
+    "content-type"=>"text/plain; charset=utf-8",
+];
 
 if ($_SERVER['REQUEST_METHOD'] == "POST"){
     $erreur = [];
@@ -41,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     }
 
     if ($erreur == []){
-        if(mail("esteban.racine2004@gmail.com", $objet, $message, "From: ".$mail)) {
+        $headers["from"]= $mail ;
+        if(mail("esteban.racine2004@gmail.com", $objet, $message, $headers)) {
             $nom = NULL;
             $mail = NULL;
             $message = NULL;
