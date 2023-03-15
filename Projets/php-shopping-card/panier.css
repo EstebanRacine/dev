@@ -3,3 +3,67 @@ body{
     background-image: repeating-linear-gradient(45deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(256,7%,84%),hsl(256,7%,84%));
 }
 
+.container{
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+
+
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table{
+    width: 100%;
+}
+
+table th{
+    background-color: mediumpurple;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+}
+
+table td{
+    padding: 10px 10px;
+    text-align: center;
+}
+
+table tbody tr{
+    border-bottom: mediumpurple 1px solid;
+}
+
+#prixTotal{
+    color: rebeccapurple;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+    padding: 3px 5px;
+    transition: all 0.5s;
+}
+
+.action{
+    background-color: rebeccapurple;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover{
+    border-radius: 10px;
+}
+
+.action:hover{
+    background-color: mediumpurple;
+}
+
+.panierVide{
+    padding: 100px;
+    font-weight: bold;
+}

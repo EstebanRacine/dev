@@ -1,4 +1,25 @@
 <?php
+
+session_start();
+
+if (!isset($_SESSION['panier'])){
+    $_SESSION['panier'] = [];
+}
+
+if ($_SERVER['REQUEST_METHOD']=="POST"){
+    if (isset($_POST["viderPanier"])){
+        $_SESSION['panier'] =[];
+    }elseif(isset($_POST['modifProd'])){
+        $nom = $_POST['nom'];
+        $_SESSION["panier"][$nom]['quantite'] = $_POST['quantite'];
+    }elseif (isset($_POST['suppProd'])){
+        unset($_SESSION['panier'][$_POST['nom']]);
+    }
+}
+
+$prixTotal = 0;
+
+
 ?>
 
 <!doctype html>
@@ -17,6 +38,77 @@
     <title>Mon panier</title>
 </head>
 <body>
+<div class="container">
+    <h1>Votre panier</h1>
 
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix Unitaire</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php
+        if (!empty($_SESSION['panier'])){
+        foreach ($_SESSION['panier'] as $nom=>$produit){
+        ?>
+        <tr>
+            <td><?= $nom ?></td>
+            <td><?= $produit['prix']." €" ?></td>
+            <td>
+                <form method="post">
+                    <input type="text" hidden name="nom" value="<?= $nom?>">
+                    <input type="number" value="<?= $produit['quantite']?>" min="1" step="1" name="quantite">
+                    <button type="submit" class="modifProd" name="modifProd">Modifier</button>
+                </form>
+            </td>
+            <td><?= $produit['quantite']*$produit['prix']." €" ?></td>
+            <?php
+            $prixTotal += $produit['quantite']*$produit['prix'];
+            ?>
+            <td>
+                <form method="post">
+                    <input type="text" hidden name="nom" value="<?= $nom?>">
+                    <button type="submit" class="action" name="suppProd" value="1">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        <?php
+        }
+        ?>
+        <tfoot>
+        <tr>
+            <td colspan="3">
+                TOTAL
+            </td>
+            <td id="prixTotal"><?= number_format($prixTotal, 2)." €" ?></td>
+            <td>
+                <form action="" method="post">
+                    <button type="submit" name="viderPanier" class="action">Vider le panier</button>
+                </form>
+            </td>
+        </tr>
+        </tfoot>
+        <?php
+        }else{
+        echo "
+        <tr>
+        <td class='panierVide' colspan='5'>Vous n'avez aucun produit dans votre panier</td>
+</tr>
+        ";
+        }
+        ?>
+        </tbody>
+    </table>
+
+<!--    AJOUTER BOUTON-->
+
+
+
+    </div>
 </body>
 </html>
