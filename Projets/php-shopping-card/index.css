@@ -89,7 +89,7 @@ body{
 
 .card img{
     aspect-ratio: 400/275;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
     height: 100%;
     border-radius: 5px 5px 0 0;
@@ -122,4 +122,77 @@ body{
     background-color: mediumpurple;
 }
 
+.description{
+    text-align: justify;
+    height: 100px;
+    overflow: scroll;
+    scrollbar-color: rebeccapurple;
+    scrollbar-width: thin;
+    margin: 10px 0;
+    padding: 0 3px;
+}
 
+.nom{
+    height: 3em;
+    text-align: start;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+}
+
+
+.page{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    margin: 30px auto auto;
+    justify-content: center;
+}
+
+.pageNumber{
+    padding: 5px;
+    width: 35px;
+    height: 35px;
+    text-decoration: none;
+    color: white;
+    background-color: rebeccapurple;
+    border-radius: 50%;
+    text-align: center;
+    transition: all 0.5s;
+    margin-right: 5px;
+    margin-left: 3px;
+}
+
+.present{
+    background-color: mediumpurple;
+    border: 2px solid rebeccapurple;
+}
+
+.pageNumber:hover{
+    background-color: mediumpurple;
+}
+
+.suivant, .precedent{
+    width: max-content;
+    height: max-content;
+    background-color: transparent;
+    color: rebeccapurple;
+    transition: all 0.5s;
+    text-decoration: none;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.suivant:hover, .precedent:hover{
+    background-color: transparent;
+    color: mediumpurple;
+}
+
+.suivant{
+    margin-left: 10px;
+}
+
+.precedent{
+    margin-right: 10px;
+}

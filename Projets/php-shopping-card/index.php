@@ -1,5 +1,7 @@
 <?php
 
+include_once "src/modele/requetesProduits.php";
+
 session_start();
 
 if(!isset($_SESSION['panier'])){
@@ -14,6 +16,12 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     }
 }
 
+$page = 0;
+
+if (isset($_GET['page'])){
+    $page = $_GET['page'];
+}
+
 $produits = [
         ["nom"=>"Produit 1", "img"=> "https://picsum.photos/id/10/300/200", "prix"=>19.99, "description"=>"Description Produit 1"],
         ["nom"=>"Produit 2", "img"=> "https://picsum.photos/id/20/300/200", "prix"=>5.49, "description"=>"Description Produit 2"],
@@ -26,6 +34,9 @@ $produits = [
         ["nom"=>"Produit 9", "img"=> "https://picsum.photos/id/90/300/200", "prix"=>4.3, "description"=>"Description Produit 9"]
 ];
 
+include_once "coupageEn6.php";
+
+$produits = $listeProduits[$page];
 
 ?>
 
@@ -69,21 +80,21 @@ $produits = [
     <div class="produits">
             <?php
             foreach ($produits as $produit){
-                $produit["prix"]=number_format($produit["prix"], 2);
+                $produit["prixProduit"]=number_format($produit["prixProduit"], 2);
             ?>
                 <div class="card">
-                    <img src="<?= $produit['img'] ?>" alt="Image du produit">
-                    <h2><?php
-                        echo $produit['nom'];
-                        if (in_array($produit["nom"], array_keys($_SESSION["panier"]))){
+                    <img src="<?= $produit['imgProduit'] ?>" alt="Image du produit">
+                    <h2 class="nom"><?php
+                        echo $produit['nomProduit'];
+                        if (in_array($produit["nomProduit"], array_keys($_SESSION["panier"]))){
                             echo " <i class='fa-solid fa-certificate'></i>";
                         }
                         ?></h2>
-                    <h3><?= "Prix : ".$produit['prix']." €" ?></h3>
-                    <p><?= $produit['description'] ?></p>
+                    <h3><?= "Prix : ".$produit['prixProduit']." €" ?></h3>
+                    <p class="description"><?= $produit['descrProduit']?></p>
                     <form action="" method="post">
-                        <input hidden type="text" value="<?= $produit["nom"]?>" name="produit">
-                        <input hidden type="text" value="<?= $produit['prix']?>" name="prix">
+                        <input hidden type="text" value="<?= $produit["idProduit"]?>" name="produit">
+                        <input hidden type="text" value="<?= $produit['prixProduit']?>" name="prix">
                         <button type="submit"><i class="fa-sharp fa-solid fa-cart-shopping"></i></button>
                     </form>
                 </div>
@@ -93,6 +104,24 @@ $produits = [
             <?php
             }
             ?>
+    </div>
+    <div class="page">
+        <?php
+        if ($page <> 0){
+            echo "<a class='precedent' href='index.php?page=" . ($page - 1) ."'>Précédent</a>";
+        }
+        for ($i=1; $i<=count($listeProduits); $i++){
+            if ($i == $page+1){
+                echo "<a class='pageNumber present' href='index.php?page=" . ($i - 1) ."'>$i</a>";
+            }else{
+                echo "<a class='pageNumber' href='index.php?page=" . ($i - 1) ."'>$i</a>";
+            }
+
+        }
+        if ($page <> count($listeProduits)-1){
+            echo "<a class='suivant' href='index.php?page=" . ($page + 1) ."'>Suivant</a>";
+        }
+        ?>
     </div>
 </div>
 

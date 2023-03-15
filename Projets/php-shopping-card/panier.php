@@ -2,6 +2,8 @@
 
 session_start();
 
+include_once "src/modele/requetesProduits.php";
+
 if (!isset($_SESSION['panier'])){
     $_SESSION['panier'] = [];
 }
@@ -16,7 +18,10 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
         unset($_SESSION['panier'][$_POST['nom']]);
     }
 }
-
+if (!empty($_SESSION['panier'])) {
+    $produits = array_keys($_SESSION['panier']);
+    $produits = getProduitsByIds($produits);
+}
 $prixTotal = 0;
 
 
@@ -44,6 +49,7 @@ $prixTotal = 0;
     <table>
         <thead>
         <tr>
+            <th>Image</th>
             <th>Nom</th>
             <th>Prix Unitaire</th>
             <th>Quantité</th>
@@ -54,25 +60,25 @@ $prixTotal = 0;
         <tbody>
         <?php
         if (!empty($_SESSION['panier'])){
-        foreach ($_SESSION['panier'] as $nom=>$produit){
+        foreach ($produits as $produit){
         ?>
         <tr>
-            <td><?= $nom ?></td>
-            <td><?= $produit['prix']." €" ?></td>
+            <td><?= $produit['nomProduit'] ?></td>
+            <td><?= $produit['prixProduit']." €" ?></td>
             <td>
                 <form method="post">
-                    <input type="text" hidden name="nom" value="<?= $nom?>">
-                    <input type="number" value="<?= $produit['quantite']?>" min="1" step="1" name="quantite">
+                    <input type="text" hidden name="nom" value="<?= $produit['idProduit']?>">
+                    <input type="number" value="<?= $_SESSION['panier'][$produit['idProduit']]['quantite']?>" min="1" step="1" name="quantite">
                     <button type="submit" class="modifProd" name="modifProd">Modifier</button>
                 </form>
             </td>
-            <td><?= $produit['quantite']*$produit['prix']." €" ?></td>
+            <td><?= $_SESSION['panier'][$produit['idProduit']]['quantite']*$produit['prixProduit']." €" ?></td>
             <?php
-            $prixTotal += $produit['quantite']*$produit['prix'];
+            $prixTotal += $_SESSION['panier'][$produit['idProduit']]['quantite']*$produit['prixProduit'];
             ?>
             <td>
                 <form method="post">
-                    <input type="text" hidden name="nom" value="<?= $nom?>">
+                    <input type="text" hidden name="nom" value="<?= $produit['idProduit']?>">
                     <button type="submit" class="action" name="suppProd" value="1">Supprimer</button>
                 </form>
             </td>
@@ -82,7 +88,7 @@ $prixTotal = 0;
         ?>
         <tfoot>
         <tr>
-            <td colspan="3">
+            <td colspan="3" id="total">
                 TOTAL
             </td>
             <td id="prixTotal"><?= number_format($prixTotal, 2)." €" ?></td>
@@ -107,6 +113,10 @@ $prixTotal = 0;
 
 <!--    AJOUTER BOUTON-->
 
+    <div class="boutonsPanier">
+        <a href="index.php">Continuer mes achats</a>
+        <a href="">Valider mon panier</a>
+    </div>
 
 
     </div>

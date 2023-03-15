@@ -63,7 +63,33 @@ button:hover{
     background-color: mediumpurple;
 }
 
+#total{
+    font-weight: bold;
+}
+
 .panierVide{
     padding: 100px;
     font-weight: bold;
+}
+
+.boutonsPanier{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 70%;
+    margin: 15px auto auto;
+}
+
+.boutonsPanier a{
+    padding: 20px 15px;
+    background-color: mediumpurple;
+    color: white;
+    border: rebeccapurple 2px solid;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.5s;
+}
+
+.boutonsPanier a:hover{
+    transform: scale(1.1);
 }
