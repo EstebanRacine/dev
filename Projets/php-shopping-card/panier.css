@@ -30,6 +30,7 @@ table th{
 table td{
     padding: 10px 10px;
     text-align: center;
+    height: 150px;
 }
 
 table tbody tr{
@@ -92,4 +93,9 @@ button:hover{
 
 .boutonsPanier a:hover{
     transform: scale(1.1);
+}
+
+td img{
+    object-fit: contain;
+    height: 100%;
 }

@@ -63,8 +63,9 @@ $prixTotal = 0;
         foreach ($produits as $produit){
         ?>
         <tr>
+            <td><img src="<?= $produit['imgProduit'] ?>" alt="Image du produit"></td>
             <td><?= $produit['nomProduit'] ?></td>
-            <td><?= $produit['prixProduit']." €" ?></td>
+            <td><?= number_format($produit['prixProduit'], 2)." €" ?></td>
             <td>
                 <form method="post">
                     <input type="text" hidden name="nom" value="<?= $produit['idProduit']?>">
@@ -72,7 +73,7 @@ $prixTotal = 0;
                     <button type="submit" class="modifProd" name="modifProd">Modifier</button>
                 </form>
             </td>
-            <td><?= $_SESSION['panier'][$produit['idProduit']]['quantite']*$produit['prixProduit']." €" ?></td>
+            <td><?= number_format($_SESSION['panier'][$produit['idProduit']]['quantite']*$produit['prixProduit'], 2)." €" ?></td>
             <?php
             $prixTotal += $_SESSION['panier'][$produit['idProduit']]['quantite']*$produit['prixProduit'];
             ?>
