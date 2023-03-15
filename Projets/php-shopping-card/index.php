@@ -23,7 +23,7 @@ $produits = [
         ["nom"=>"Produit 6", "img"=> "https://picsum.photos/id/60/300/200", "prix"=>12.25, "description"=>"Description Produit 6"],
         ["nom"=>"Produit 7", "img"=> "https://picsum.photos/id/70/300/200", "prix"=>99.99, "description"=>"Description Produit 7"],
         ["nom"=>"Produit 8", "img"=> "https://picsum.photos/id/80/300/200", "prix"=>9.99, "description"=>"Description Produit 8"],
-        ["nom"=>"Produit 9", "img"=> "https://picsum.photos/id/90/300/200", "prix"=>4.30, "description"=>"Description Produit 9"]
+        ["nom"=>"Produit 9", "img"=> "https://picsum.photos/id/90/300/200", "prix"=>4.3, "description"=>"Description Produit 9"]
 ];
 
 
@@ -50,11 +50,11 @@ $produits = [
 <div class="container">
     <div class="panier">
         <div class="iconePanier">
-            <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+            <a href="panier.php"><i class="fa-sharp fa-solid fa-cart-shopping"></i></a>
         </div>
         <div class="infosPanier">
             <p><?= count($_SESSION['panier'])." produit(s)"?></p>
-            <p><?php
+            <p class="prix"><?php
                 $prix = 0;
                 foreach ($_SESSION['panier'] as $produit){
                     $prix += $produit["quantite"]*$produit['prix'];

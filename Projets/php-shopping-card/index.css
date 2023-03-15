@@ -1,7 +1,6 @@
 body{
-    height: 100vh;
+    min-height: 100vh;
     background-image: repeating-linear-gradient(45deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),repeating-linear-gradient(135deg, rgb(255,255,255) 0px, rgb(255,255,255) 10px,transparent 10px, transparent 11px),linear-gradient(90deg, hsl(256,7%,84%),hsl(256,7%,84%));
-
 }
 
 .container{
@@ -20,20 +19,44 @@ body{
     padding: 3px;
     color: mediumpurple;
     font-size: 1.8rem;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.panier .iconePanier a{
+    color: rebeccapurple;
+    transition: color 0.25s;
 }
 
 .panier .infosPanier{
+    position: relative;
+    right: -50px;
     width: max-content;
     opacity: 0;
     padding: 5px;
     border: 2px solid mediumpurple;
-    font-size: 0.5rem;
+    font-size: 0.75rem;
     margin-right: 3px;
+    transition: transform 0.5s, opacity 0.5s;
+    z-index: 1;
+
+}
+
+.prix{
+    font-weight: bold;
 }
 
 .panier .iconePanier:hover + .infosPanier{
     opacity: 1;
+    transform: translateX(-60px);
 }
+
+.panier .iconePanier:hover a{
+    color: mediumpurple;
+}
+
+
+
 
 .container h1{
     font-size: 2rem;
