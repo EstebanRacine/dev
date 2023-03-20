@@ -2,23 +2,45 @@
 include_once "src/utils/date.php";
 include_once "src/utils/requetes.php";
 include_once "src/utils/fonctions.php";
+session_start();
 
-if ($_SERVER['REQUEST_METHOD']=="POST"){
-    $login = $_POST['login'];
-    $mdp = $_POST['mdp'];
-    $acces = verifUser($login, $mdp);
-    $demandes = getAllContact();
-    if (isset($_POST['traitement'])){
-        $traitement = $_POST['traitement'];
-        if ($traitement == 0){
-            $demandes = getContactNonTraites();
-        }elseif ($traitement == 1){
-            $demandes = getContactTraites();
-        }
-    }
+$acces = "Non connecté";
 
+if (!isset($_SESSION['user'])){
+    $_SESSION['user']=[];
 }
 
+if ($_SERVER['REQUEST_METHOD']=="POST") {
+    if (isset($_POST['deco'])) {
+        $_SESSION['user'] = [];
+    } else {
+
+        $login = $_POST['login'];
+        $mdp = $_POST['mdp'];
+        $acces = verifUser($login, $mdp);
+        $demandes = getAllContact();
+        if (isset($_POST['traitement'])) {
+            $traitement = $_POST['traitement'];
+            if ($traitement == 0) {
+                $demandes = getContactNonTraites();
+            } elseif ($traitement == 1) {
+                $demandes = getContactTraites();
+            }
+        }
+        if (gettype($acces) == "boolean") {
+            $_SESSION['user']['login'] = $login;
+            $_SESSION['user']['mdp'] = $mdp;
+        }
+    }
+}
+
+if (isset($_SESSION['user']['login'])){
+    $acces = verifUser($_SESSION['user']['login'], $_SESSION['user']['mdp']);
+    $_POST['login'] = $_SESSION['user']['login'];
+    $_POST['mdp'] = $_SESSION['user']['mdp'];
+    $_POST['mdp'] = $_SESSION['user']['mdp'];
+    $demandes = getAllContact();
+}
 
 ?>
 
@@ -40,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     ?>
 
     <?php
-    if ($_SERVER['REQUEST_METHOD']=="GET" or gettype($acces)=="string"){?>
+    if (gettype($acces)=="string"){?>
         <div class="connexionGestion">
             <form action="" method="post" class="formConnexionGestion" autocomplete="off">
                 <div class="center">
@@ -121,8 +143,12 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
                 <?php
                 }
                 ?>
+            <form action="" method="post">
+                <button type="submit" value="1" name="deco", id="deco">Se déconnecter</button>
+            </form>
 
         </div>
+
 
     <?php
     }

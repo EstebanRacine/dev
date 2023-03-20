@@ -345,7 +345,7 @@ option{
     height: max-content;
 }
 
-.recherche input, #sendMail, #submitFormDemande{
+.recherche input, #sendMail, #submitFormDemande, #deco, #retourDemande{
     display: block;
     background-color: black;
     color: gold;
@@ -358,7 +358,7 @@ option{
     transition: all 0.5s;
 }
 
-.recherche input:hover, #sendMail:hover, #submitFormDemande:hover{
+.recherche input:hover, #sendMail:hover, #submitFormDemande:hover, #deco:hover, #retourDemande:hover{
     box-shadow: 1px 1px 10px 3px white;
 }
 

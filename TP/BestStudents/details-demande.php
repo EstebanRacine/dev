@@ -3,10 +3,16 @@ include_once "src/utils/date.php";
 include_once "src/utils/requetes.php";
 include_once "src/utils/fonctions.php";
 
+
+
 $id = $_GET['id'];
 
 if ($_SERVER['REQUEST_METHOD']=="POST"){
-    traiterContact($id);
+    if (isset($_POST['retour'])){
+        header("Location: gestionDemandes.php");
+    }else {
+        traiterContact($id);
+    }
 }
 
 $demande = getContactById($id);
@@ -53,6 +59,12 @@ $heure = substr($datetime, 11);
         <?= $etat ?>
         <form action="" method="post">
             <input type="submit" value="Demande traitée">
+        </form>
+
+        <form action="" method="post">
+            <input hidden type="text" name="login" value="">
+            <input hidden type="text" name="mdp" value="">
+            <button name="retour" value="1" id="retourDemande">Retour</button>
         </form>
 
     </div>
