@@ -10,15 +10,19 @@ if (!isset($_SESSION['user'])){
     $_SESSION['user']=[];
 }
 
+if (!isset($_SESSION['user']['isCo'])){
+    $_SESSION['user']['isCo'] = False;
+}else{
+    $demandes = getAllContact();
+}
+
 if ($_SERVER['REQUEST_METHOD']=="POST") {
     if (isset($_POST['deco'])) {
-        $_SESSION['user'] = [];
+        $_SESSION['user']['isCo'] = False;
     } else {
-
         $login = $_POST['login'];
         $mdp = $_POST['mdp'];
         $acces = verifUser($login, $mdp);
-        $demandes = getAllContact();
         if (isset($_POST['traitement'])) {
             $traitement = $_POST['traitement'];
             if ($traitement == 0) {
@@ -28,18 +32,9 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
             }
         }
         if (gettype($acces) == "boolean") {
-            $_SESSION['user']['login'] = $login;
-            $_SESSION['user']['mdp'] = $mdp;
+            $_SESSION['user']['isCo'] == true;
         }
     }
-}
-
-if (isset($_SESSION['user']['login'])){
-    $acces = verifUser($_SESSION['user']['login'], $_SESSION['user']['mdp']);
-    $_POST['login'] = $_SESSION['user']['login'];
-    $_POST['mdp'] = $_SESSION['user']['mdp'];
-    $_POST['mdp'] = $_SESSION['user']['mdp'];
-    $demandes = getAllContact();
 }
 
 ?>
@@ -62,7 +57,7 @@ if (isset($_SESSION['user']['login'])){
     ?>
 
     <?php
-    if (gettype($acces)=="string"){?>
+    if ($_SESSION['user']['isCo']){?>
         <div class="connexionGestion">
             <form action="" method="post" class="formConnexionGestion" autocomplete="off">
                 <div class="center">
@@ -90,8 +85,8 @@ if (isset($_SESSION['user']['login'])){
         ?>
         <div class="listeDemandes">
             <form action="" method="post">
-                <input hidden type="text" value="<?= $_POST['login']?>" name="login">
-                <input hidden type="password" value="<?= $_POST['mdp']?>" name="mdp">
+<!--                <input hidden type="text" value="--><?//= $_POST['login']?><!--" name="login">-->
+<!--                <input hidden type="password" value="--><?//= $_POST['mdp']?><!--" name="mdp">-->
                 <select name="traitement" id="traitement">
                     <option value="">Toutes les demandes</option>
                     <option value="0">Demande non traitées</option>
@@ -144,7 +139,7 @@ if (isset($_SESSION['user']['login'])){
                 }
                 ?>
             <form action="" method="post">
-                <button type="submit" value="1" name="deco", id="deco">Se déconnecter</button>
+                <button type="submit" value="1" name="deco" id="deco">Se déconnecter</button>
             </form>
 
         </div>

@@ -62,8 +62,8 @@ $heure = substr($datetime, 11);
         </form>
 
         <form action="" method="post">
-            <input hidden type="text" name="login" value="">
-            <input hidden type="text" name="mdp" value="">
+<!--            <input hidden type="text" name="login" value="">-->
+<!--            <input hidden type="text" name="mdp" value="">-->
             <button name="retour" value="1" id="retourDemande">Retour</button>
         </form>
 
