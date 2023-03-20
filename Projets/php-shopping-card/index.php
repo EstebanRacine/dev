@@ -34,9 +34,8 @@ $produits = [
         ["nom"=>"Produit 9", "img"=> "https://picsum.photos/id/90/300/200", "prix"=>4.3, "description"=>"Description Produit 9"]
 ];
 
-include_once "coupageEn6.php";
-
-$produits = $listeProduits[$page];
+$nbProd = getNbProduits()['nbProd'];
+$produits = getProduitsParPage($page);
 
 ?>
 
@@ -110,7 +109,7 @@ $produits = $listeProduits[$page];
         if ($page <> 0){
             echo "<a class='precedent' href='index.php?page=" . ($page - 1) ."'>Précédent</a>";
         }
-        for ($i=1; $i<=count($listeProduits); $i++){
+        for ($i=1; $i<=ceil($nbProd/6); $i++){
             if ($i == $page+1){
                 echo "<a class='pageNumber present' href='index.php?page=" . ($i - 1) ."'>$i</a>";
             }else{
@@ -118,7 +117,7 @@ $produits = $listeProduits[$page];
             }
 
         }
-        if ($page <> count($listeProduits)-1){
+        if ($page <> ceil($nbProd/6)-1){
             echo "<a class='suivant' href='index.php?page=" . ($page + 1) ."'>Suivant</a>";
         }
         ?>

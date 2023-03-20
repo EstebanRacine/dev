@@ -122,20 +122,18 @@ function traiterContact($id){
 
 
 function addUser($nom, $prenom, $login, $mdp, $acces){
-    $sel = "BestStudentsForever";
     $connexion = createConnection();
     $requete = $connexion->prepare("INSERT INTO utilisateurs(nomUser, prenomUser, loginUser, mdpUser, accesAdmin)
 VALUES (:nom, :prenom,:login, :mdp, :acces)");
     $requete->bindValue('nom', $nom);
     $requete->bindValue('prenom', $prenom);
     $requete->bindValue('login', $login);
-    $requete->bindValue('mdp', md5($mdp.$sel));
+    $requete->bindValue('mdp', password_hash($mdp, PASSWORD_DEFAULT));
     $requete->bindValue('acces', $acces);
     $requete->execute();
 }
 
 function verifUser($login, $mdp){
-    $sel = "BestStudentsForever";
     $connexion = createConnection();
     $requete = $connexion->prepare("SELECT mdpUser FROM utilisateurs WHERE loginUser = :login");
     $requete->bindValue('login', $login);
@@ -143,7 +141,7 @@ function verifUser($login, $mdp){
     $requete = $requete->fetch(PDO::FETCH_ASSOC);
     if (!empty($requete)){
         $mdpSauv = $requete['mdpUser'];
-        if($mdpSauv == md5($mdp.$sel)){
+        if(password_verify($mdp, $mdpSauv)){
             return true;
         }else{
             return "Le mot de passe n'est pas valide.";
