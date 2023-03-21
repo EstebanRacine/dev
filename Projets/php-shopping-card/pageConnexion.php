@@ -1,4 +1,9 @@
 <?php
+
+session_start();
+
+$login = null;
+
 ?>
 
 <!doctype html>
@@ -13,6 +18,23 @@
     <title>Connexion</title>
 </head>
 <body>
+
+<div class="alignement">
+    <div class="connexion">
+        <h1>Connexion</h1>
+        <form action="" method="post" autocomplete="off">
+            <label for="login">Login</label>
+            <input type="text" id="login" name="login" value="<?= $login ?>">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+            <button id="buttonConnexion" type="submit">Se connecter</button>
+        </form>
+        <h3>Pas encore de compte ?</h3>
+        <a href="createUser.php">Créez en un !</a>
+    </div>
+</div>
+
+
 
 </body>
 </html>
