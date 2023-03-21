@@ -20,9 +20,12 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     if (isset($_POST['deco'])) {
         $_SESSION['user']['isCo'] = False;
     } else {
-        $login = $_POST['login'];
-        $mdp = $_POST['mdp'];
-        $acces = verifUser($login, $mdp);
+        if (!$_SESSION['user']['isCo']) {
+            $login = $_POST['login'];
+            $mdp = $_POST['mdp'];
+            $acces = verifUser($login, $mdp);
+        }
+        $demandes = getAllContact();
         if (isset($_POST['traitement'])) {
             $traitement = $_POST['traitement'];
             if ($traitement == 0) {
@@ -32,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
             }
         }
         if (gettype($acces) == "boolean") {
-            $_SESSION['user']['isCo'] == true;
+            $_SESSION['user']['isCo'] = true;
         }
     }
 }
@@ -57,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
     ?>
 
     <?php
-    if ($_SESSION['user']['isCo']){?>
+    if (!$_SESSION['user']['isCo']){?>
         <div class="connexionGestion">
             <form action="" method="post" class="formConnexionGestion" autocomplete="off">
                 <div class="center">

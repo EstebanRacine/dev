@@ -7,12 +7,21 @@ session_start();
 if(!isset($_SESSION['panier'])){
     $_SESSION['panier'] = [];
 }
+
+if (!isset($_SESSION['user'])){
+    $_SESSION['user'] = [];
+}
+
 if ($_SERVER['REQUEST_METHOD']=="POST"){
-    if (in_array($_POST["produit"], array_keys($_SESSION['panier']))){
-        $_SESSION['panier'][$_POST["produit"]]["quantite"] += 1;
-    }else{
-        $_SESSION['panier'][$_POST["produit"]]["quantite"] = 1;
-        $_SESSION['panier'][$_POST["produit"]]["prix"] = $_POST["prix"];
+    if (isset($_POST['deco'])){
+        $_SESSION['user'] = [];
+    }else {
+        if (in_array($_POST["produit"], array_keys($_SESSION['panier']))) {
+            $_SESSION['panier'][$_POST["produit"]]["quantite"] += 1;
+        } else {
+            $_SESSION['panier'][$_POST["produit"]]["quantite"] = 1;
+            $_SESSION['panier'][$_POST["produit"]]["prix"] = $_POST["prix"];
+        }
     }
 }
 
@@ -59,7 +68,21 @@ $produits = getProduitsParPage($page);
 <body>
 <div class="container">
     <div class="panier">
-        <div class="iconePanier">
+        <div class="icone">
+            <a href="pageConnexion.php"><i class="fa-solid fa-user"></i></a>
+        </div>
+        <?php
+        if ($_SESSION['user']['isCo']){
+        ?>
+        <div class="deco">
+            <form action="" method="post" id="formDeconnecter">
+                <button type="submit" value="1" name="deco"><i class="fa-solid fa-xmark"></i> Se déconnecter</button>
+            </form>
+        </div>
+        <?php
+        }
+        ?>
+        <div class="icone">
             <a href="panier.php"><i class="fa-sharp fa-solid fa-cart-shopping"></i></a>
         </div>
         <div class="infosPanier">

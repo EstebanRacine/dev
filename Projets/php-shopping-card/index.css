@@ -14,16 +14,16 @@ body{
     flex-direction: row-reverse;
 }
 
-.panier .iconePanier{
+.panier .icone{
     width: max-content;
-    padding: 3px;
     color: mediumpurple;
     font-size: 1.8rem;
     z-index: 2;
     cursor: pointer;
+    padding: 3px 3px 3px 10px;
 }
 
-.panier .iconePanier a{
+.panier .icone a{
     color: rebeccapurple;
     transition: color 0.25s;
 }
@@ -42,20 +42,52 @@ body{
 
 }
 
+.panier .deco{
+    position: absolute;
+    right: 10%;
+    width: 0;
+    opacity: 0;
+    padding: 5px;
+    border: 2px solid mediumpurple;
+    font-size: 0.75rem;
+    transition: transform 0.5s;
+    z-index: 1;
+}
+
+.panier .deco form button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 3px;
+}
+
+.panier .deco i{
+    transition: all 0.5s;
+}
+
 .prix{
     font-weight: bold;
 }
 
-.panier .iconePanier:hover + .infosPanier{
+.panier .icone:hover + .infosPanier{
     opacity: 1;
     transform: translateX(-60px);
 }
 
-.panier .iconePanier:hover a{
+.panier .icone:hover + .deco, .deco:hover{
+    opacity: 1;
+    transform: translateY(50px);
+    width: max-content;
+}
+
+.deco button:hover i{
+    transform: rotate(270deg);
     color: mediumpurple;
 }
 
-
+.panier .icone:hover a{
+    color: mediumpurple;
+}
 
 
 .container h1{
