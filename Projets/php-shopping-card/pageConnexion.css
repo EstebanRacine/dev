@@ -3,8 +3,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
-
 
 
 .connexion{
@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
+    padding: 10px 10px 15px;
 }
 
 .connexion > *{
@@ -25,7 +25,7 @@
 
 .connexion form{
     margin-bottom: 10px;
-    margin-top: 15px;
+    margin-top: 10px;
     width: 50%;
 }
 
@@ -33,7 +33,7 @@
 input, button{
     display: block;
     margin-top: 8px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     width: 100%;
     transition: all 0.3s;
 }
@@ -51,13 +51,28 @@ button{
     height: 0.8cm;
     font-size: 1.1em;
     transition: all 0.5s;
-    margin-top: 15px;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 button:hover{
-    transform: scale(1.05);
+    transform: scale(1.07);
 }
 
 h3{
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+}
+
+.connexion a{
+    padding: 10px;
+    background-color: rebeccapurple;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-family: Bahnschrift, sans-serif;
+    transition: background-color 0.5s;
+}
+
+.connexion a:hover{
+    background-color: mediumpurple;
 }

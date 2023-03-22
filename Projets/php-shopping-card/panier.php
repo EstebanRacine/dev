@@ -4,9 +4,9 @@ session_start();
 
 include_once "src/modele/requetesProduits.php";
 
-if (!isset($_SESSION['panier'])){
-    $_SESSION['panier'] = [];
-}
+include_once "src/modele/initialisationVariables.php";
+
+
 
 if ($_SERVER['REQUEST_METHOD']=="POST"){
     if (isset($_POST["viderPanier"])){
@@ -104,7 +104,7 @@ $prixTotal = 0;
         }else{
         echo "
         <tr>
-        <td class='panierVide' colspan='5'>Vous n'avez aucun produit dans votre panier</td>
+        <td class='panierVide' colspan='6'>Vous n'avez aucun produit dans votre panier</td>
 </tr>
         ";
         }

@@ -4,17 +4,12 @@ include_once "src/modele/requetesProduits.php";
 
 session_start();
 
-if(!isset($_SESSION['panier'])){
-    $_SESSION['panier'] = [];
-}
-
-if (!isset($_SESSION['user'])){
-    $_SESSION['user'] = [];
-}
+include_once "src/modele/initialisationVariables.php";
 
 if ($_SERVER['REQUEST_METHOD']=="POST"){
     if (isset($_POST['deco'])){
         $_SESSION['user'] = [];
+        $_SESSION['isCo'] = false;
     }else {
         if (in_array($_POST["produit"], array_keys($_SESSION['panier']))) {
             $_SESSION['panier'][$_POST["produit"]]["quantite"] += 1;
@@ -72,7 +67,7 @@ $produits = getProduitsParPage($page);
             <a href="pageConnexion.php"><i class="fa-solid fa-user"></i></a>
         </div>
         <?php
-        if ($_SESSION['user']['isCo']){
+        if ($_SESSION['isCo']){
         ?>
         <div class="deco">
             <form action="" method="post" id="formDeconnecter">

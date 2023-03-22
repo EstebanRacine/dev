@@ -10,7 +10,7 @@ function getAllLogins(){
     return $users;
 }
 
-function verifConnexion($login, $password){
+function verifConnexion($login, $password):bool{
     if (!in_array($login, getAllLogins())){
         return False;
     }else{
@@ -23,8 +23,9 @@ function verifConnexion($login, $password){
     }
 }
 
-function addUser($nom, $prenom, $login, $password,$mail):void{
+function addUser($nom, $prenom, $login, $password,$mail){
     $connexion = createConnection();
+    $password = password_hash($password, PASSWORD_DEFAULT);
     $requete = $connexion->prepare("INSERT INTO users(nomUser, prenomUser, loginUser, passwordUser, mailUser)
 VALUES (:nom, :prenom, :login, :password, :mail)");
     $requete->bindParam('nom', $nom);
@@ -33,4 +34,13 @@ VALUES (:nom, :prenom, :login, :password, :mail)");
     $requete->bindParam('password', $password);
     $requete->bindParam('mail', $mail);
     $requete->execute();
+    return $connexion->lastInsertId();
+}
+
+function getUserByLogin($login){
+    $connexion =createConnection();
+    $requete = $connexion->prepare("SELECT * FROM users  WHERE loginUser = :login");
+    $requete->bindParam('login', $login);
+    $requete -> execute();
+    return $requete->fetch(PDO::FETCH_ASSOC);
 }
