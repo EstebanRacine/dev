@@ -1,6 +1,6 @@
 <?php
 
-include "../connexionBDD.php";
+include "connexionBDD.php";
 
 function getAllLogins(){
     $connexion = createConnection();

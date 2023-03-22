@@ -1,6 +1,6 @@
 <?php
 
-include_once "../connexionBDD.php";
+include_once "connexionBDD.php";
 
 function getProduitsByCommande($idCommande){
     $connexion = createConnection();
@@ -9,3 +9,5 @@ function getProduitsByCommande($idCommande){
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
+
+var_dump(getProduitsByCommande(1));

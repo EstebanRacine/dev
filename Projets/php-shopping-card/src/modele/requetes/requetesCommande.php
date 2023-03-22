@@ -1,6 +1,6 @@
 <?php
 
-include_once "../connexionBDD.php";
+include_once "connexionBDD.php";
 
 function addCommande($idUser){
     $connexion = createConnection();
