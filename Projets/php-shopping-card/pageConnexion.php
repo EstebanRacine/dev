@@ -1,6 +1,6 @@
 <?php
 
-include_once "src/modele/requetesUsers.php";
+include_once "src/modele/requetes/requetesUsers.php";
 
 session_start();
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
 <div class="alignement">
     
     <div class="retour">
-        <a href="index.php"><i class="fa-solid fa-circle-arrow-left"></i> Retour à l'accueil'</a>
+        <a href="index.php"><i class="fa-solid fa-circle-arrow-left"></i> Retour à l'accueil</a>
     </div>
 
     <div class="connexion">

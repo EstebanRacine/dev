@@ -9,7 +9,7 @@ function addCommande($idUser){
     $requete->execute();
 }
 
-function getCommandeByUserId($idUser){
+function getCommandesByUserId($idUser){
     $connexion = createConnection();
     $requete = $connexion->prepare("SELECT * FROM commande WHERE idUser = :idUser");
     $requete->bindParam('idUser', $idUser);

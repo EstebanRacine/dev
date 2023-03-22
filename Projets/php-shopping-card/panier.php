@@ -2,7 +2,7 @@
 
 session_start();
 
-include_once "src/modele/requetesProduits.php";
+include_once "src/modele/requetes/requetesProduits.php";
 
 include_once "src/modele/initialisationVariables.php";
 
