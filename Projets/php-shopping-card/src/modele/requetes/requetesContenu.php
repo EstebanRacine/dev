@@ -9,5 +9,3 @@ function getProduitsByCommande($idCommande){
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
-
-var_dump(getProduitsByCommande(1));

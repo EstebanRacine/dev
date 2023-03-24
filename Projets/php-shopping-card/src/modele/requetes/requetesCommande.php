@@ -16,3 +16,5 @@ function getCommandesByUserId($idUser){
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
+
+var_dump(getCommandesByUserId(4));
