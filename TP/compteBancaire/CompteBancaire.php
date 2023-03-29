@@ -23,9 +23,6 @@ class CompteBancaire{
         $this->titulaire = $titulaire;
         $this->decouvert = $decouvert;
         $this->dateInscription = $dateInscr;
-
-
-
     }
 
     public function getNumCompte(): string
