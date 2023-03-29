@@ -12,14 +12,14 @@ class CompteBancaire{
     /**
      * @throws Exception
      */
-    public function __construct(float $solde, string $titulaire, int $decouvert, string $dateInscr)
+    public function __construct(string $titulaire, int $decouvert, string $dateInscr)
     {
         $numCompte = "FR-";
         $nbAleatoire = strval(random_int(0, 99999999));
         $nbAleatoire = str_pad($nbAleatoire, 8, "0", STR_PAD_LEFT);
         $numCompte .= $nbAleatoire;
         $this->numCompte = $numCompte;
-        $this->solde = $solde;
+        $this->solde = 0;
         $this->titulaire = $titulaire;
         $this->decouvert = $decouvert;
 
@@ -56,8 +56,13 @@ class CompteBancaire{
         }
     }
 
-    public function consulterSolde(){
-        return "Bonjour ".$this->titulaire.", votre solde est de ".number_format($this->solde, 2)." €.".PHP_EOL;
+    public function consulterCompte(){
+        if ($this->gold){
+            $gold = "Gold";
+        }else{
+            $gold = "Basic";
+        }
+        return "N° de compte : ".$this->numCompte.PHP_EOL."Titulaire : ".$this->titulaire.PHP_EOL."Solde : ".number_format($this->solde, 2)." €.".PHP_EOL."Type de compte : ".$gold;
     }
 
     public function isGold(){
