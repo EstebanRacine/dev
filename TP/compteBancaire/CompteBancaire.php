@@ -38,8 +38,9 @@ class CompteBancaire{
         $max = $this->solde+$this->decouvert;
         if ($somme<= $max){
             $this->solde -= $somme;
+            return True;
         }else{
-            echo "Vous ne pouvez pas retirer cette somme.".PHP_EOL;
+            return False;
         }
     }
 
@@ -61,4 +62,12 @@ class CompteBancaire{
         }
     }
 
+    public function virement($somme, $compte2){
+        if ($this->retireSolde($somme)){
+            $compte2->addSolde($somme);
+            return True;
+        }else{
+            return False;
+        }
+    }
 }
