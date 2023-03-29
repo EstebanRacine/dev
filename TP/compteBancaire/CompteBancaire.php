@@ -6,7 +6,7 @@ class CompteBancaire{
     private float $solde;
     private string $titulaire;
     private int $decouvert;
-    private bool $gold;
+    private string $dateInscription;
 
 
     /**
@@ -22,19 +22,9 @@ class CompteBancaire{
         $this->solde = 0;
         $this->titulaire = $titulaire;
         $this->decouvert = $decouvert;
+        $this->dateInscription = $dateInscr;
 
-        $now = time();
-        $date = date('Y-m-d', $now);
 
-        $origine = date_create($dateInscr);
-        $actuel = date_create($date);
-        $diff = date_diff($origine, $actuel);
-        $anneDepuisInscription = $diff->format('%Y');
-        if ($anneDepuisInscription>=10){
-            $this->gold = True;
-        }else{
-            $this->gold = False;
-        }
 
     }
 
@@ -57,19 +47,20 @@ class CompteBancaire{
     }
 
     public function consulterCompte(){
-        if ($this->gold){
-            $gold = "Gold";
-        }else{
-            $gold = "Basic";
-        }
-        return "N° de compte : ".$this->numCompte.PHP_EOL."Titulaire : ".$this->titulaire.PHP_EOL."Solde : ".number_format($this->solde, 2)." €.".PHP_EOL."Type de compte : ".$gold;
+        return "N° de compte : ".$this->numCompte.PHP_EOL."Titulaire : ".$this->titulaire.PHP_EOL."Solde : ".number_format($this->solde, 2)." €.".PHP_EOL;
     }
 
     public function isGold(){
-        if ($this->gold){
-            return "Le compte est gold.".PHP_EOL;
+        $now = time();
+        $date = date('Y-m-d', $now);
+        $origine = date_create($this->dateInscription);
+        $actuel = date_create($date);
+        $diff = date_diff($origine, $actuel);
+        $anneDepuisInscription = $diff->format('%Y');
+        if ($anneDepuisInscription>=10){
+            return "Le compte est Gold";
         }else{
-            return "Le compte n'est pas gold".PHP_EOL;
+            return "le compte n'est pas Gold";
         }
     }
 
