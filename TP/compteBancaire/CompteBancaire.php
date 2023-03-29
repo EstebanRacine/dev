@@ -62,9 +62,9 @@ class CompteBancaire{
 
     public function isGold(){
         if ($this->gold){
-            return "Le compte est gold.";
+            return "Le compte est gold.".PHP_EOL;
         }else{
-            return "Le compte n'est pas gold";
+            return "Le compte n'est pas gold".PHP_EOL;
         }
     }
 
