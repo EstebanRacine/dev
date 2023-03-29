@@ -4,17 +4,26 @@ class Rectangle{
 
     private int $longueur;
     private int $largeur;
+    private string $couleur;
 
-    public function __construct(int $longueur, int $largeur){
+    public function __construct(int $longueur, int $largeur, string $couleur){
 
         $this->longueur = $longueur;
         $this->largeur = $largeur;
+        $this->couleur = $couleur;
     }
 
     public function calculAire():int{
         return $this->longueur*$this->largeur;
     }
 
+    public function calculPerimetre():int{
+        return $this->longueur*2+$this->largeur*2;
+    }
+
+    public function getInfosString():string{
+        return "Le rectangle a une longueur de ".$this->longueur.", une largeur de ".$this->largeur." et est ".$this->couleur;
+    }
 //ACCESSEURS
 
     public function getLongueur():int{
@@ -23,6 +32,11 @@ class Rectangle{
 
     public function getLargeur():int{
         return $this->largeur;
+    }
+
+    public function getCouleur(): string
+    {
+        return $this->couleur;
     }
 
 //MUTATEURS
@@ -43,6 +57,11 @@ class Rectangle{
         }else{
             echo PHP_EOL."La longueur doit être positive pour être modifiée.".PHP_EOL;
         }
+    }
+
+    public function setCouleur(string $couleur):void
+    {
+        $this->couleur = $couleur;
     }
 
 }

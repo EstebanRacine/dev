@@ -5,10 +5,10 @@ class Rect
     private int $largeur;
 
 
-    public function __construct(int $longeur, int $largeur)
+    public function __construct()
     {
-        $this->longeur = $longeur;
-        $this->largeur = $largeur;
+        $this->longeur = 0;
+        $this->largeur = 0;
     }
 
 
