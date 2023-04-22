@@ -4,34 +4,67 @@ include_once "src/utils/requetes.php";
 include_once "src/utils/fonctions.php";
 session_start();
 
+
 $acces = "Non connecté";
 
 if (!isset($_SESSION['user'])){
     $_SESSION['user']=[];
 }
 
-if (!isset($_SESSION['user']['isCo'])){
+if (!isset($_SESSION['user']['isCo'])) {
     $_SESSION['user']['isCo'] = False;
-}else{
-    $demandes = getAllContact();
 }
+
+if ($_SESSION['user']['isCo']){
+    if (isAdmin($_SESSION['user']['login'])) {
+        $demandes = getAllContact();
+    }else{
+        $demandes = getContactByLogin($_SESSION['user']['login']);
+    }
+}
+
+
 
 if ($_SERVER['REQUEST_METHOD']=="POST") {
     if (isset($_POST['deco'])) {
-        $_SESSION['user']['isCo'] = False;
+        $_SESSION['user'] = [];
+        header('Location: gestionDemandes.php');
     } else {
         if (!$_SESSION['user']['isCo']) {
             $login = $_POST['login'];
             $mdp = $_POST['mdp'];
             $acces = verifUser($login, $mdp);
+            if ($acces){
+                $_SESSION['user']['login'] = $login;
+                var_dump($_SESSION['user']['login']);
+            }
         }
-        $demandes = getAllContact();
         if (isset($_POST['traitement'])) {
             $traitement = $_POST['traitement'];
             if ($traitement == 0) {
-                $demandes = getContactNonTraites();
+                if (isAdmin($_SESSION['user']['login'])) {
+                    $demandes = getContactNonTraites();
+                }else{
+                    $demandes = getContactNonTraitesByLogin($_SESSION['user']['login']);
+                }
             } elseif ($traitement == 1) {
-                $demandes = getContactTraites();
+                if (isAdmin($_SESSION['user']['login'])) {
+                    $demandes = getContactTraites();
+                }else{
+                    $demandes = getContactTraitesByLogin($_SESSION['user']['login']);
+                }
+            }else{
+                if (isAdmin($_SESSION['user']['login'])) {
+                    $demandes = getAllContact();
+                }else{
+                    $demandes = getContactByLogin($_SESSION['user']['login']);
+                }
+            }
+        }else{
+            if (isAdmin($_SESSION['user']['login'])) {
+                $demandes = getAllContact();
+            }else{
+                $demandes = getContactByLogin($_SESSION['user']['login']);
             }
         }
         if (gettype($acces) == "boolean") {
@@ -73,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
                 <input type="password" id="mdp" name="mdp">
                     <span class="barre"></span>
                 <input type="submit" value="Se connecter" id="connexionSubmitGestion">
+                    <a href="createAccount.php">Créer un compte</a>
                     <?php
                     if ($_SERVER['REQUEST_METHOD']=="POST"){
                         echo "<p class='Rouge'>$acces</p>";
@@ -87,6 +121,8 @@ if ($_SERVER['REQUEST_METHOD']=="POST") {
         }else{
         ?>
         <div class="listeDemandes">
+            <?php
+            ?>
             <form action="" method="post">
 <!--                <input hidden type="text" value="--><?//= $_POST['login']?><!--" name="login">-->
 <!--                <input hidden type="password" value="--><?//= $_POST['mdp']?><!--" name="mdp">-->

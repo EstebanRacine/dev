@@ -8,4 +8,3 @@ function mailConfirmation($nom, $prenom, $mail){
 
     mail($mail, "Confirmation de contact", "Bonjour $prenom $nom , \n Votre message a bien été prit en compte et sera traité le plus rapidement possible.", $headers);
 }
-

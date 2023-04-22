@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 24 mars 2023 à 09:25
--- Version du serveur : 10.4.24-MariaDB
--- Version de PHP : 8.1.6
+-- Généré le : sam. 22 avr. 2023 à 23:52
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,16 +35,20 @@ CREATE TABLE `contact` (
   `objetContact` varchar(30) NOT NULL,
   `messageContact` text NOT NULL,
   `datetimeContact` datetime NOT NULL DEFAULT current_timestamp(),
-  `traitementContact` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `traitementContact` int(1) NOT NULL DEFAULT 0,
+  `loginUser` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `contact`
 --
 
-INSERT INTO `contact` (`idContact`, `nomContact`, `prenomContact`, `mailContact`, `objetContact`, `messageContact`, `datetimeContact`, `traitementContact`) VALUES
-(2, 'Racine', 'Esteban', 'esteban.racineecole@gmail.com', 'Test mail BDD', 'qzbieulufhzbgyqduqnnnnoiéééinéio,hé udhud', '2023-03-08 14:28:02', 1),
-(3, 'Testeur', 'Josh', 'josh.mail@gmail.com', 'Test liste', ' Bonjour,\r\nÉtant élèves dans votre structure je n\'ai pas pu accéder à mes données depuis un poste de la bibliothèque.\r\nPourrions nous convenir d\'un rendez-vous pour résoudre ce problème.\r\nCordialement.\r\nJosh Testeur', '2023-03-08 17:05:30', 0);
+INSERT INTO `contact` (`idContact`, `nomContact`, `prenomContact`, `mailContact`, `objetContact`, `messageContact`, `datetimeContact`, `traitementContact`, `loginUser`) VALUES
+(2, 'Racine', 'Esteban', 'esteban.racineecole@gmail.com', 'Test mail BDD', 'qzbieulufhzbgyqduqnnnnoiéééinéio,hé udhud', '2023-03-08 14:28:02', 1, 'ano'),
+(3, 'Testeur', 'Josh', 'josh.mail@gmail.com', 'Test liste', ' Bonjour,\r\nÉtant élèves dans votre structure je n\'ai pas pu accéder à mes données depuis un poste de la bibliothèque.\r\nPourrions nous convenir d\'un rendez-vous pour résoudre ce problème.\r\nCordialement.\r\nJosh Testeur', '2023-03-08 17:05:30', 0, 'higakus'),
+(4, 'Chalant', 'Manon', 'manoon.chalant@gmail.com', 'Message via formulaire de cont', ' Bonjour,\r\nTous mes fichiers ont disparus, on dirait que mon compte a été réinitialisé.\r\nPourriez vous les retrouver ?\r\nCordialement\r\nManon Chalant', '2023-04-22 19:47:23', 1, 'higakus'),
+(11, 'Racine', 'Esteban', 'esteban.racine2004@gmail.com', 'Test 24', 'Bonjour,\r\nTest 24 doit être traité ', '2023-04-22 23:50:30', 1, 'racinee'),
+(12, 'Racine', 'Esteban', 'esteban.racine2004@gmail.com', 'Test 25', 'Bonjour,\r\nCe test n°25 ne doit pas être traité ', '2023-04-22 23:51:00', 0, 'racinee');
 
 -- --------------------------------------------------------
 
@@ -63,7 +67,7 @@ CREATE TABLE `etudiants` (
   `img` varchar(200) NOT NULL,
   `ville` varchar(70) NOT NULL,
   `promo_etudiant` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `etudiants`
@@ -96,7 +100,7 @@ CREATE TABLE `horaires` (
   `ouvertureApMidi` varchar(5) DEFAULT NULL,
   `fermetureApMidi` varchar(5) DEFAULT NULL,
   `lib_jour` varchar(8) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `horaires`
@@ -120,7 +124,7 @@ INSERT INTO `horaires` (`id_jour`, `ouvertureMatin`, `fermetureMatin`, `ouvertur
 CREATE TABLE `promotions` (
   `id_promo` int(11) NOT NULL,
   `nom_promo` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `promotions`
@@ -143,14 +147,16 @@ CREATE TABLE `utilisateurs` (
   `loginUser` varchar(30) NOT NULL,
   `mdpUser` varchar(60) NOT NULL,
   `accesAdmin` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `utilisateurs`
 --
 
 INSERT INTO `utilisateurs` (`nomUser`, `prenomUser`, `loginUser`, `mdpUser`, `accesAdmin`) VALUES
-('Shin', 'Higaku', 'higakus', '$2y$10$3JZ.FNiZIl4KGR/.qYhu1.8bzx7JdAUYonKANrFmf/Dc9cE494GkW', 1);
+('Anonyme', 'Anonyme', 'ano', 'gbbdvnsuqbyivevbrybciecberionrvioqrjvoernjiovneio', 0),
+('Shin', 'Higaku', 'higakus', '$2y$10$3JZ.FNiZIl4KGR/.qYhu1.8bzx7JdAUYonKANrFmf/Dc9cE494GkW', 1),
+('Racine', 'Esteban', 'racinee', '$2y$10$gG/HNce9Y1GleiyLrddCEOFrBIeok6F7jAufdpfplMZoMe260FfoO', 0);
 
 --
 -- Index pour les tables déchargées
@@ -160,7 +166,8 @@ INSERT INTO `utilisateurs` (`nomUser`, `prenomUser`, `loginUser`, `mdpUser`, `ac
 -- Index pour la table `contact`
 --
 ALTER TABLE `contact`
-  ADD PRIMARY KEY (`idContact`);
+  ADD PRIMARY KEY (`idContact`),
+  ADD KEY `FK_utilisateurs_contact` (`loginUser`);
 
 --
 -- Index pour la table `etudiants`
@@ -195,7 +202,7 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `idContact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idContact` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `etudiants`
@@ -220,10 +227,10 @@ ALTER TABLE `promotions`
 --
 
 --
--- Contraintes pour la table `etudiants`
+-- Contraintes pour la table `contact`
 --
-ALTER TABLE `etudiants`
-  ADD CONSTRAINT `etudiants` FOREIGN KEY (`promo_etudiant`) REFERENCES `promotions` (`id_promo`);
+ALTER TABLE `contact`
+  ADD CONSTRAINT `FK_utilisateurs_contact` FOREIGN KEY (`loginUser`) REFERENCES `utilisateurs` (`loginUser`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

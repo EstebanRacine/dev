@@ -240,7 +240,7 @@ nav a:hover{
     margin: auto auto;
 }
 
-/*Creation-etudaint*/
+/*Creation-etudiant*/
 
 .creation{
     width: 300px;
@@ -345,9 +345,12 @@ option{
     height: max-content;
 }
 
-.recherche input, #sendMail, #submitFormDemande, #deco, #retourDemande{
-    display: block;
+.recherche input, #sendMail, #submitFormDemande, #deco, #retourDemande, .infosConnexionContact a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: black;
+    text-decoration: none;
     color: gold;
     width: 3cm;
     height: 1cm;
@@ -358,7 +361,7 @@ option{
     transition: all 0.5s;
 }
 
-.recherche input:hover, #sendMail:hover, #submitFormDemande:hover, #deco:hover, #retourDemande:hover{
+.recherche input:hover, #sendMail:hover, #submitFormDemande:hover, #deco:hover, #retourDemande:hover, .infosConnexionContact a:hover{
     box-shadow: 1px 1px 10px 3px white;
 }
 
@@ -370,6 +373,7 @@ option{
     grid-template-columns: 3fr 1.2fr;
     margin-top: 50px;
     padding-bottom: 120px;
+    margin-bottom: 120px;
 }
 
 .infos{
@@ -470,6 +474,14 @@ option{
     margin-bottom: 20px;
 }
 
+.infosConnexionContact{
+    width: 100%;
+    text-align: center;
+}
+
+#sendMail{
+    scale: 1.1;
+}
 /*GESTION DES DEMANDES*/
 
 /*connexionUser*/
@@ -491,7 +503,7 @@ option{
     padding: 20px 10px;
 }
 
-.formConnexionGestion input{
+.formConnexionGestion input, .formConnexionGestion a{
     display: block;
     background-color: #232323;
     margin-top: 5px;
@@ -542,14 +554,21 @@ input:focus ~ .barre:before, input:focus ~ .barre:after{
     margin: auto;
 }
 
-#connexionSubmitGestion{
+#connexionSubmitGestion, .formConnexionGestion a{
     margin-top: 20px;
     cursor: pointer;
     transition: all 0.5s;
 }
 
+.formConnexionGestion a{
+    text-decoration: none;
+    display: flex;
+    font-size: 0.8em;
+    align-items: center;
+    justify-content: center;
+}
 
-#connexionSubmitGestion:hover{
+#connexionSubmitGestion:hover, .formConnexionGestion a:hover{
     box-shadow: 1px 1px 10px 3px gold;
 }
 
@@ -642,6 +661,7 @@ input:focus ~ .barre:before, input:focus ~ .barre:after{
 footer{
     background-color: #232323;
     height: max-content;
+    bottom: 0;
 }
 
 .reseaux{

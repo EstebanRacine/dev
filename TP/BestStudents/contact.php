@@ -4,6 +4,8 @@ include_once "src/utils/date.php";
 include_once "src/utils/requetes.php";
 include_once "src/utils/fonctions.php";
 
+session_start();
+
 $horaires = getAllHoraires();
 $nom = NULL;
 $prenom = NULL;
@@ -53,8 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     }
 
     if ($erreur == []){
-        createContact($nom, $prenom, $mail, $objet, $message);
-        mailConfirmation($nom, $prenom, $mail);
+        if (isset($_SESSION['user']['login'])){
+            createContact($nom, $prenom, $mail, $objet, $message, $_SESSION['user']['login']);
+        }else {
+            createContact($nom, $prenom, $mail, $objet, $message, 'ano');
+        }
+//        mailConfirmation($nom, $prenom, $mail);
 
         $nom = NULL;
         $mail = NULL;
@@ -191,6 +197,23 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
                 <?php
                 if (isset($erreur['message'])){
                     echo "<p class='Rouge'>".$erreur['message']."</p>";
+                }
+                ?>
+
+                <?php
+                if ($_SESSION['user']['isCo']<>1){
+                ?>
+                        <div class="infosConnexionContact">
+                    <h1 class="Rouge">/!\ ATTENTION /!\ </h1><h2 class="Rouge"> Si vous souhaitez acceder à votre demande depuis ce site web vous devez être connecté</h2>
+                    <a href="gestionDemandes.php">Se connecter</a>
+                        </div>
+                <?php
+                }else{
+                ?>
+                <div class="infosConnexionContact">
+                    <h2 class="Vert">Vous êtes connecté</h2>
+                </div>
+                <?php
                 }
                 ?>
 

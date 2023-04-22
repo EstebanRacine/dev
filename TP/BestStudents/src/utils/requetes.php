@@ -66,21 +66,30 @@ function getAllHoraires(){
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function createContact($nom, $prenom, $mail, $objet, $message){
+function createContact($nom, $prenom, $mail, $objet, $message, $loginUser){
     $connexion = createConnection();
-    $requete = $connexion->prepare("INSERT INTO contact(nomContact, prenomContact, mailContact, objetContact, messageContact)
-VALUES(:nom, :prenom, :mail, :objet, :message)");
+    $requete = $connexion->prepare("INSERT INTO contact(nomContact, prenomContact, mailContact, objetContact, messageContact, loginUser)
+VALUES(:nom, :prenom, :mail, :objet, :message, :login)");
     $requete->bindValue('nom', $nom);
     $requete->bindValue('prenom', $prenom);
     $requete->bindValue('mail', $mail);
     $requete->bindValue('objet', $objet);
     $requete->bindValue('message', $message);
+    $requete->bindValue('login', $loginUser);
     $requete->execute();
 }
 
 function getAllContact(){
     $connexion = createConnection();
     $requete = $connexion-> prepare("SELECT * FROM contact");
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getContactByLogin($login){
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM contact WHERE loginUser = :login");
+    $requete->bindValue('login', $login);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -101,6 +110,14 @@ function getContactNonTraites(){
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getContactNonTraitesByLogin($login){
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM contact WHERE traitementContact = 0 AND loginUser = :login");
+    $requete->bindValue('login', $login);
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getContactTraites(){
     $connexion = createConnection();
     $requete = $connexion->prepare("SELECT * FROM contact WHERE traitementContact = 1");
@@ -108,6 +125,13 @@ function getContactTraites(){
     return $requete->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getContactTraitesByLogin($login){
+    $connexion = createConnection();
+    $requete = $connexion-> prepare("SELECT * FROM contact WHERE traitementContact = 1 AND loginUser = :login");
+    $requete->bindValue('login', $login);
+    $requete->execute();
+    return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
 
 function traiterContact($id){
     $connexion = createConnection();
@@ -151,3 +175,25 @@ function verifUser($login, $mdp){
     }
 }
 
+function loginValid($login){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("SELECT loginUser FROM utilisateurs");
+    $requete->execute();
+    $logins = $requete->fetchAll(PDO::FETCH_COLUMN);
+    return !in_array($login, $logins);
+}
+
+function isAdmin($login){
+    $connexion = createConnection();
+    $requete = $connexion->prepare("SELECT accesAdmin FROM utilisateurs WHERE loginUser = :login");
+    $requete->bindValue('login', $login);
+    $requete->execute();
+    if($requete->fetch(PDO::FETCH_COLUMN) == 0){
+        return false;
+    }
+    return true;
+}
+
+
+
+//var_dump(getContactTraitesByLogin('higakus'));
