@@ -5,17 +5,19 @@
  */
 
 // Créer un objet DateTime avec la date du jour et l'heure courante
-
+$date = new DateTime();
 // Afficher le fuseau horaire de l'objet
-
+$fuseau = $date->getTimezone();
+echo $fuseau->getName();
 echo PHP_EOL;
 // Modifier le fuseau horaire de l'objet pour qu'il soit à New York
 
+$date->setTimezone(new DateTimeZone('America/New_York'));
 // Afficher la date du jour au format jj/mm/aaaa hh:mm
-
+echo $date->format("d/m/Y H:i");
 echo PHP_EOL;
 // Créer un objet DateTime avec la date du jour et l'heure courante et le fuseau horaire de New York
-
+$date2 = new DateTime('now', new DateTimeZone('America/New_York'));
 // Afficher la date du jour au format jj/mm/aaaa hh:mm
-
+echo $date2->format("d/m/Y H:i");
 echo PHP_EOL;
