@@ -36,6 +36,7 @@ class Evenement{
 
     public function getCompteARebours():string{
         $dateEve = DateTime::createFromFormat("d/m/Y", $this->date);
+        $dateEve->setTime(0, 0);
         $dateNow = new DateTime();
         $diff = date_diff($dateNow, $dateEve);
         return $diff->format("%a jours, %H heures, %I minutes et %S secondes");
