@@ -4,24 +4,24 @@
 class Phrase{
     private string $phrase;
 
-    public function __construct($phrase){
+    public function __construct(string $phrase){
         $this->phrase = $phrase;
     }
 
-    public function toString(){
+    public function toString() : string {
         return $this->phrase;
     }
 
-    public function calculerNombresMots(){
+    public function calculerNombresMots() : string{
         return str_word_count($this->phrase);
     }
 
-    public function getMotPosition($nb){
+    public function getMotPosition(int $nb) : string{
         $phrase = explode(" ", $this->phrase);
         return $phrase[$nb-1];
     }
 
-    public function getType(){
+    public function getType() : string {
         $point =  $this->phrase[-1];
         if ($point == "."){
             return "Phrase déclarative.";
@@ -34,15 +34,13 @@ class Phrase{
         }
     }
 
-    public function calculerNombreLettres(){
+    public function calculerNombreLettres() : string {
         $phrase = str_replace(" ", "", $this->phrase);
-        if ($phrase[-1] == "!" || $phrase[-1] == "." || $phrase[-1] == "?"){
-            $phrase = substr($phrase, 0, strlen($phrase)-1);
-        }
+//        return $phrase;
         return strlen($phrase);
     }
 
-    public function getMotOccurence($mot){
+    public function getMotOccurence(string $mot) : string {
         $phrase = explode(" ", $this->phrase);
         $compteur = 0;
         foreach ($phrase as $motPhrase){
