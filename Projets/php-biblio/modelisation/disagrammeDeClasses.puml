@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 10
+
+class Auteur{
+    -String nom
+    -String prénom
+    +__construct(string nom, string prenom)
+}
+
+class Livre{
+    -String isbn
+    -String titre
+    -Datetime dateParution
+    -Int nbPages
+    +__construct(string isbn, string titre, Datetime dateParution, int nbPages)
+}
+
+Livre "0..* "-->"1..1  " Auteur : " est écrit par"
+
+@enduml
