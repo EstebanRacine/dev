@@ -4,19 +4,32 @@
 skinparam classAttributeIconSize 10
 
 class Auteur{
-    -String nom
-    -String prénom
+    -String : nom
+    -String : prénom
     +__construct(string nom, string prenom)
 }
 
 class Livre{
-    -String isbn
-    -String titre
-    -Datetime dateParution
-    -Int nbPages
+    -String : isbn
+    -String : titre
+    -Datetime : dateParution
+    -Int : nbPages
     +__construct(string isbn, string titre, Datetime dateParution, int nbPages)
 }
 
-Livre "0..* "-->"1..1  " Auteur : " est écrit par"
+class Catégorie{
+    - String : libelle
+    +__construct(string libelle)
+}
+
+class Editeur{
+    - String : nom
+    - String : ville
+    + __construct(string nom, string ville)
+}
+
+Livre "0..*"-->"1..1 " Auteur : " est écrit par"
+Livre "0..*"-->"1..1" Catégorie : " appartient"
+Livre "0..*"-->"1..1" Editeur : est édité
 
 @enduml
