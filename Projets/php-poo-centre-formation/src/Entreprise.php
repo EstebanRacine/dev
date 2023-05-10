@@ -3,19 +3,19 @@
 class Entreprise {
     private string $nomEntreprise;
     private string $rueEntreprise;
-    private int $cpEntreprise;
+    private string $cpEntreprise;
     private string $villeEntreprise;
 
     /**
      * @param string $nomEntreprise
      * @param string $rueEntreprise
-     * @param int $cpEntreprise
+     * @param string $cpEntreprise
      * @param string $villeEntreprise
      */
     public function __construct(
         string $nomEntreprise,
         string $rueEntreprise,
-        int $cpEntreprise,
+        string $cpEntreprise,
         string $villeEntreprise,
     ) {
         $this->nomEntreprise = $nomEntreprise;
