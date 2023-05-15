@@ -86,7 +86,7 @@ class Commande
     {
         foreach ($this->lignesCommandes as $ligneCom) {
             if ($ligneCom->getProduit() == $produit) {
-                $ligneCom->setQuantite($quantite+$ligneCom->getQuantite());
+                $ligneCom->setQuantite($quantite + $ligneCom->getQuantite());
                 return "Produit ajouté";
             }
         }
@@ -150,11 +150,11 @@ class Commande
             $contenuBon .= $ligneCom->getPrixTTC() . " € - " . PHP_EOL;
         }
         $contenuBon .=
-            PHP_EOL . "        Total HT  : " . $this->getPrixTotalHT()." €";
+            PHP_EOL . "        Total HT  : " . $this->getPrixTotalHT() . " €";
         $contenuBon .=
-            PHP_EOL . "        Total TVA : " . $this->getPrixTotalTVA()." €";
+            PHP_EOL . "        Total TVA : " . $this->getPrixTotalTVA() . " €";
         $contenuBon .=
-            PHP_EOL . "        Total TTC : " . $this->getPrixTotalTTC()." €";
+            PHP_EOL . "        Total TTC : " . $this->getPrixTotalTTC() . " €";
         return $contenuBon;
     }
 }
