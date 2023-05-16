@@ -16,6 +16,7 @@ class AuteurDAO{
 //        RECUPERER ENREGISTREMENTS
         $connexion->prepare("SELECT * FROM auteur");
 
+
 //        MAPPER LES ENREGISTREMENTS VERS DES OBJETS
 
 
