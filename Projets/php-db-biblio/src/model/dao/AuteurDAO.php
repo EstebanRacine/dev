@@ -14,14 +14,21 @@ class AuteurDAO{
 //        CONNEXION AVEC BDD
         $connexion = Database::getConnection();
 //        RECUPERER ENREGISTREMENTS
-        $connexion->prepare("SELECT * FROM auteur");
-
-
-//        MAPPER LES ENREGISTREMENTS VERS DES OBJETS
-
+        $requete = $connexion->prepare("SELECT * FROM auteur");
+        $requete->execute();
+        $auteursDB = $requete->fetchAll(PDO::FETCH_ASSOC);
+        //        MAPPER LES ENREGISTREMENTS VERS DES OBJETS
+        $auteurs = [];
+        foreach ($auteursDB as $auteurDB){
+            $auteur = new Auteur();
+            $auteur->setId($auteurDB['idAuteur']);
+            $auteur->setNomAuteur($auteurDB['nomAuteur']);
+            $auteur->setPrenomAuteur($auteurDB['prenomAuteur']);
+            $auteurs[] = $auteur;
+        }
 
 //        RETOURNER RESULTAT
-
+        return $auteurs;
 
     }
 }
