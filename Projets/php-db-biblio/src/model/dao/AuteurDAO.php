@@ -34,13 +34,15 @@ class AuteurDAO{
         $requete->bindParam('idAuteur', $idAuteur);
         $requete->execute();
         $auteur = $requete->fetchAll(PDO::FETCH_ASSOC);
+        if ($auteur===false){
+            return null;
+        }
         return $this->toObject($auteur[0]);
     }
 
-    public function create(Auteur $auteur) : void{
+    public function create(Auteur $auteur){
         $connexion = Database::getConnection();
-        $requete = $connexion->prepare("INSERT INTO auteur(idAuteur, nomAuteur, prenomAuteur) VALUES (:id, :nom, :prenom)");
-        $requete->bindValue('id', $auteur->getId());
+        $requete = $connexion->prepare("INSERT INTO auteur(idAuteur, nomAuteur, prenomAuteur) VALUES (NULL, :nom, :prenom)");
         $requete->bindValue('nom', $auteur->getNomAuteur());
         $requete->bindValue('prenom', $auteur->getPrenomAuteur());
         $requete->execute();
@@ -48,11 +50,15 @@ class AuteurDAO{
 
 
     public function delete(int $id) : void{
-        $connexion = Database::getConnection();
-        $requete = $connexion->prepare("DELETE FROM auteur WHERE idAuteur = :id");
+        $connexionLiv = Database::getConnection();
+        $requeteLivre = $connexionLiv->prepare("DELETE FROM livre WHERE idAuteur = :idAut");
+        $requeteLivre->bindParam('idAut', $id);
+        $requeteLivre->execute();
+
+        $connexionAut = Database::getConnection();
+        $requete = $connexionAut->prepare("DELETE FROM auteur WHERE idAuteur = :id");
         $requete->bindParam('id', $id);
         $requete->execute();
-
     }
 
 
