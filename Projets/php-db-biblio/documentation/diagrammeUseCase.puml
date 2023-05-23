@@ -2,12 +2,12 @@
 'https://plantuml.com/class-diagram
 
 :Utilisateur:
-package Livre{
 (searchByISBN)
 (getAllLivre)
-}
+(getLivreByNomAuteur)
 
 Utilisateur-->searchByISBN
 Utilisateur-->getAllLivre
+Utilisateur-->getLivreByNomAuteur
 
 @enduml
