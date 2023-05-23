@@ -5,7 +5,7 @@ require_once "Editeur.php";
 require_once "Categorie.php";
 
 class Livre{
-    private  string $isbn;
+    private string $isbn;
     private string $titre;
     private int $nbPages;
     private DateTime $dateParution;
