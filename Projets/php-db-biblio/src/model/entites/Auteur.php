@@ -59,5 +59,8 @@ class Auteur{
     }
 
 
+    public function getNomComplet(){
+        return $this->prenomAuteur." ".$this->nomAuteur;
+    }
 
 }

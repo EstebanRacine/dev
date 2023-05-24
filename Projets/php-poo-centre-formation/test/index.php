@@ -8,8 +8,6 @@ $salarie = new Salarie("Arthur", "Ly", $entreprise);
 
 echo $formation->inscrireSalarie($salarie).PHP_EOL;
 echo $formation->inscrireSalarie($salarie).PHP_EOL;
-echo $formation->inscrireSalarie($salarie).PHP_EOL;
-echo $formation->inscrireSalarie($salarie).PHP_EOL;
 echo $formation->noterSalarie($salarie, 15.5, "Pas mal mais Esteban a fait mieux");
 
 //var_dump($formation);

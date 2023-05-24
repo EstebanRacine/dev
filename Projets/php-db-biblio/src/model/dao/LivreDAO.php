@@ -28,7 +28,8 @@ class LivreDAO{
 
     }
 
-    public function searchISBN(string $isbn):Livre{
+    public function searchISBN(string $isbn): Livre|bool
+    {
 //        CONNEXION AVEC BDD
         $connexion = Database::getConnection();
 //        RECUPERER ENREGISTREMENTS
@@ -36,6 +37,9 @@ class LivreDAO{
         $requete->bindParam('isbn', $isbn);
         $requete->execute();
         $livresDB = $requete->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($livresDB)){
+            return false;
+        }
         $livreDB = $livresDB[0];
 
         //        MAPPER LES ENREGISTREMENTS VERS DES OBJETS
@@ -47,8 +51,34 @@ class LivreDAO{
 
     public function searchNomAuteur(string $nom):array{
         $connexion = Database::getConnection();
-        $requete = $connexion->prepare("SELECT * FROM livre INNER JOIN auteur a on livre.idAuteur = a.idAuteur WHERE nomAuteur = :nom");
+        $requete = $connexion->prepare("SELECT * FROM livre INNER JOIN auteur a on livre.idAuteur = a.idAuteur WHERE nomAuteur LIKE CONCAT('%', :nom, '%')");
         $requete->bindParam('nom', $nom);
+        $requete->execute();
+        $livresDB = $requete->fetchAll(PDO::FETCH_ASSOC);
+        $livres = [];
+        foreach ($livresDB as $livreDB){
+            $livres[] = $this->toObject($livreDB);
+        }
+        return $livres;
+    }
+
+    public function searchTitre(string $titre):array{
+        $connexion = Database::getConnection();
+        $requete = $connexion->prepare("SELECT * FROM livre INNER JOIN auteur a on livre.idAuteur = a.idAuteur WHERE livre.titre LIKE CONCAT('%', :titre, '%')");
+        $requete->bindParam('titre', $titre);
+        $requete->execute();
+        $livresDB = $requete->fetchAll(PDO::FETCH_ASSOC);
+        $livres = [];
+        foreach ($livresDB as $livreDB){
+            $livres[] = $this->toObject($livreDB);
+        }
+        return $livres;
+    }
+
+    public function searchLikeISBN(string $isbn):array{
+        $connexion = Database::getConnection();
+        $requete = $connexion->prepare("SELECT * FROM livre INNER JOIN auteur a on livre.idAuteur = a.idAuteur WHERE livre.isbn LIKE CONCAT('%', :isbn, '%')");
+        $requete->bindParam('isbn', $isbn);
         $requete->execute();
         $livresDB = $requete->fetchAll(PDO::FETCH_ASSOC);
         $livres = [];

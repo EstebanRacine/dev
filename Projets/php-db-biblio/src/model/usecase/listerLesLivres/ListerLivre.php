@@ -1,9 +1,5 @@
 <?php
 
-namespace usecase\listerLesLivres;
-use Livre;
-use LivreDAO;
-
 require_once "./src/model/dao/LivreDAO.php";
 
 

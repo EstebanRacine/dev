@@ -1,14 +1,11 @@
 <?php
 
-namespace usecase\rechercherParISBN;
-use Livre;
+namespace usecase\rechercherLikeISBN;
 use LivreDAO;
 
 require_once "./src/model/dao/LivreDAO.php";
 
-
-class RechercherByISBN
-{
+class RechercherLikeISBN{
     private LivreDAO $livreDAO;
 
     public function __construct()
@@ -16,8 +13,9 @@ class RechercherByISBN
         $this->livreDAO = new LivreDAO();
     }
 
-    public function execute($isbn): Livre|bool
+
+    public function execute(string $isbn): array
     {
-        return $this->livreDAO->searchISBN($isbn);
+        return $this->livreDAO->searchLikeISBN($isbn);
     }
 }
