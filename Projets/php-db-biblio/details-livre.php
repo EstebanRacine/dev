@@ -25,7 +25,7 @@ if (gettype($livre)=="boolean"){
 </head>
 <body>
 
-<h1>DÉTAILS DE  <?= strtoupper($livre->getTitre()) ?></h1>
+<h1>DÉTAILS DE  <?= $livre->getTitre() ?></h1>
 
 <nav>
     <a href="index.php">Accueil</a>
