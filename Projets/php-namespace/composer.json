@@ -1,0 +1,19 @@
+{
+    "name": "racinee/php-namespace",
+    "type": "project",
+    "authors": [
+        {
+            "name": "EstebanRacine",
+            "email": "racine.esteban@lyceepergaud.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\" : "src"
+        }
+    },
+    "require": {
+        "symfony/var-dumper": "^6.3",
+        "league/csv": "9.0"
+    }
+}
