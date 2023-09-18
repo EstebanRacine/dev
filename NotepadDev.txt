@@ -2,6 +2,8 @@ Aide Grid : https://css-tricks.com/wp-content/uploads/2022/02/css-grid-poster.pn
 
 Aide Flex : https://css-tricks.com/wp-content/uploads/2022/02/css-flexbox-poster.png
 
+CSS Background : https://heropatterns.com/
+
 Flex Jeu (level 12) : https://flexboxfroggy.com/#fr
 
 Grid Jeu : https://cssgridgarden.com/#fr
