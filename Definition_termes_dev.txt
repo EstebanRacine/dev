@@ -1,0 +1,6 @@
+Ensemble de classes qui permettent de réaliser un ensemble de fonctionnalités  : Composants
+Asset : fichier dans un site
+CLI : Command Line Interface
+/!\/!\ Penser à variables environnement lors utilisation CLI et autres /!\/!\
+
+migration : création de table depuis entité

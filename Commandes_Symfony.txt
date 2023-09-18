@@ -1,0 +1,30 @@
+SYMFONY
+symfony check:requirements 				-->    Verifie environnement Symfony
+symfony new nomProjet --webapp 				-->    Créer un projet (se placer dans dossier d'apparition du projet avec terminal avant commande)
+symfony console about 					-->    Affiche les informations du projets
+symfony serve -d					-->    Lance un serveur web pour le projet
+symfony server:stop 					-->    Arret du serveur
+symfony console debug:route				-->    Liste les routes
+
+symfony console make:controller	"nomControlleur"	-->    Crée un controlleur
+symfony console make:entity "nomEntité"			-->    Crée une entité
+symfony console doctrine:database:create 		-->    Crée la base de données prévue dans le fichier .env
+symfony console make:migration 				-->    Crée la migration
+symfony console doctrine:migration:migrate		-->    Execute la migration (ajoute les entités dans phpMyAdmin)
+
+TWIG
+parent() 						-->    Récupère les css de la base et les additionne à ceux désirés
+path()							-->    Faire référence à la route via son nom
+
+COMPOSER
+composer install					-->    Installe les dépendances du fichier composer.json pour éviter de cloner dans git
+
+GITHUB
+git remote add nomRemote "lien" 			-->    Crée le lien entre le depot en ligne et le repertoire local
+git branch -M main 					-->    Renome branche master en main
+git push -u origin main 				-->    Fais le lien entre la branche main et le dépot distant origin
+git status 						-->    Affiche le statut du lien avec git
+git add . 						-->    Ajoute tous les fichiers au commit
+git commit -m "nomCommit"				-->    Crée le commit
+git push 						-->    Envoie le commit sur le git
+

@@ -1,0 +1,61 @@
+.alignement{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.retour{
+    margin-bottom: 15px;
+}
+
+.retour i{
+    font-size: 1.1em;
+}
+
+.createUser{
+    width: 40%;
+    border-radius: 10px;
+    border: 5px solid mediumpurple;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px 10px 15px;
+}
+
+h1{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+form{
+    width: 40%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+input{
+    display: block;
+    width: 100%;
+}
+
+button{
+    width: 80px;
+    height: 80px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color: mediumpurple;
+    color: white;
+    font-family: Bahnschrift, sans-serif;
+    border: none;
+    transition: transform 0.5s;
+    margin: 10px auto auto;
+    cursor: pointer;
+
+}
+
+button:hover{
+    transform: scale(1.1);
+}
