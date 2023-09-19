@@ -12,12 +12,19 @@ symfony console doctrine:database:create 		-->    Crée la base de données pré
 symfony console make:migration 				-->    Crée la migration
 symfony console doctrine:migration:migrate		-->    Execute la migration (ajoute les entités dans phpMyAdmin)
 
+FIXTURES
+symfony console make:fixtures "nomFixtures" 		-->    Crée la fixture
+composer require fakerphp/faker --dev 			-->    Télécharge la dépendance des fakers
+symfony console doctrine:fixtures:load 			-->    Chargement des fixtures
+
+
 TWIG
 parent() 						-->    Récupère les css de la base et les additionne à ceux désirés
 path()							-->    Faire référence à la route via son nom
 
 COMPOSER
 composer install					-->    Installe les dépendances du fichier composer.json pour éviter de cloner dans git
+composer require orm-fixtures --dev 			-->    Installe la dépendance servant aux fixtures
 
 GITHUB
 git remote add nomRemote "lien" 			-->    Crée le lien entre le depot en ligne et le repertoire local
@@ -28,3 +35,14 @@ git add . 						-->    Ajoute tous les fichiers au commit
 git commit -m "nomCommit"				-->    Crée le commit
 git push 						-->    Envoie le commit sur le git
 
+ORDRE DE CRÉATION
+
+- CRÉER TABLE
+- MIGRATION
+- CREATION JEU DE DONNEES
+
+SPÉCIFICITÉ
+
+Si entité -> controlleur route avec un s à la fin et nom au singulier avec suffiixe description
+Création objet repository depuis parametre de fonction du controlleur -> Injection de dépendances
+findBy du Repository ne sert qu'avec des égalités
