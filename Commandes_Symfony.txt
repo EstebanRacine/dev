@@ -57,6 +57,7 @@ ORDRE DE CRÉATION
 
 SPÉCIFICITÉ
 
-Si entité -> controlleur route avec un s à la fin et nom au singulier avec suffiixe description
+require autoload pour utiliser les classes
+Si entité -> controlleur route avec un s à la fin et nom au singulier avec suffixe description
 Création objet repository depuis parametre de fonction du controlleur -> Injection de dépendances
 findBy du Repository ne sert qu'avec des égalités
