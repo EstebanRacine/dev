@@ -6,16 +6,20 @@ symfony serve -d					-->    Lance un serveur web pour le projet
 symfony server:stop 					-->    Arret du serveur
 symfony console debug:route				-->    Liste les routes
 
-symfony console make:controller	"nomControlleur"	-->    Crée un controlleur
-symfony console make:entity "nomEntité"			-->    Crée une entité
 symfony console doctrine:database:create 		-->    Crée la base de données prévue dans le fichier .env
+symfony console make:controller	"nomControlleur"	-->    Crée un controlleur
+(requirements: ['id'=>'\d+'])				-->    Determine si la route fini par un numérique
+symfony console make:entity "nomEntité"			-->    Crée/Modifie une entité
 symfony console make:migration 				-->    Crée la migration
-symfony console doctrine:migration:migrate		-->    Execute la migration (ajoute les entités dans phpMyAdmin)
+symfony console doctrine:migration:migrate (d:m:m)	-->    Execute la migration (ajoute les entités dans phpMyAdmin)
 
 FIXTURES
-symfony console make:fixtures "nomFixtures" 		-->    Crée la fixture
+composer require orm-fixtures --dev		 	-->    Télécharge la dépendance des fixtures
 composer require fakerphp/faker --dev 			-->    Télécharge la dépendance des fakers
-symfony console doctrine:fixtures:load 			-->    Chargement des fixtures
+symfony console make:fixtures "nom!Fixtures!" 		-->    Crée la fixture
+implements DependentFixtureInterface -> function getDependencies return[nom!Fixtures!::class] --> gère ordre fictures
+$this->setReference/getReference 			-->    Genère des valeurs entre des fixtures
+symfony console doctrine:fixtures:load (d:f:l)		-->    Chargement des fixtures
 
 
 TWIG
@@ -23,14 +27,22 @@ parent() 						-->    Récupère les css de la base et les additionne à ceux d�
 path()							-->    Faire référence à la route via son nom
 
 COMPOSER
+composer init 						-->    Initialise le dossier composer
+composer dumpautoload					-->    Genere les fichiers d'autoload
 composer install					-->    Installe les dépendances du fichier composer.json pour éviter de cloner dans git
 composer require orm-fixtures --dev 			-->    Installe la dépendance servant aux fixtures
 
 GITHUB
+git init 						-->    Initie git dans le dossier
 git remote add nomRemote "lien" 			-->    Crée le lien entre le depot en ligne et le repertoire local
 git branch -M main 					-->    Renome branche master en main
+git branch "nomBranche" 				-->    Crée une branche
+git checkout "nomBranche" 				-->    Change de branche
+git merge "nomBranche" 					-->    Merge les branches (depuis main)
+git branch -d "nomBranche" 				-->    Supprime la branche
 git push -u origin main 				-->    Fais le lien entre la branche main et le dépot distant origin
 git status 						-->    Affiche le statut du lien avec git
+git log 						-->    Historique des commits
 git add . 						-->    Ajoute tous les fichiers au commit
 git commit -m "nomCommit"				-->    Crée le commit
 git push 						-->    Envoie le commit sur le git
@@ -38,8 +50,10 @@ git push 						-->    Envoie le commit sur le git
 ORDRE DE CRÉATION
 
 - CRÉER TABLE
+- CRÉER ASSOCIATIONS
 - MIGRATION
 - CREATION JEU DE DONNEES
+- CHARGEMENT MIGRATION
 
 SPÉCIFICITÉ
 

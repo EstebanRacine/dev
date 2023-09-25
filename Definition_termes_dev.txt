@@ -6,3 +6,4 @@ CLI : Command Line Interface
 migration : création de table depuis entité
 ficture : création d'un jeu de données dans une table depuis Symfony
 Profiler : barre en bas des sites de Symfony
+git add envoie fichier dans stage avant commit
