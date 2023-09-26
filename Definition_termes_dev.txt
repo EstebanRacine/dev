@@ -10,3 +10,5 @@ Profiler : barre en bas des sites de Symfony
 
 
 git add envoie fichier dans stage avant commit
+
+Héritage : Mecanisme qui permet de créer une classe à partir d'une autre pour éviter la duplication de code
