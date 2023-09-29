@@ -8,6 +8,7 @@ ficture : création d'un jeu de données dans une table depuis Symfony
 Profiler : barre en bas des sites de Symfony
 
 
+Classe/Méthode abstraite = italique
 
 git add envoie fichier dans stage avant commit
 
