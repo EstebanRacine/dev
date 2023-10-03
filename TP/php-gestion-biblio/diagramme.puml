@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Media{
+    - string titre
+    - int dureeEmprunt
+}
+
+class Livre{
+- string isbn
+- string auteur
+- int nbPage
+}
+
+class Magazine{
+- int numero
+- date datePublication
+}
+
+class BlueRay{
+- string realisateur
+- int annee
+- int duree
+}
+
+class Adherent{
+- int numAdherent
+- string prenom
+- string nom
+- string email
+- date dateAdhesion
+}
+
+class Emprunt{
+- date dateEmprunt
+- date dateRetourEstimee
+- date dateRetour
+}
+
+Media <|-- Livre
+Media <|-- Magazine
+Media <|-- BlueRay
+
+Emprunt "0..* "--> "1..1 " Media
+Adherent "1..1 "-->"0..* " Emprunt
+
+@enduml
