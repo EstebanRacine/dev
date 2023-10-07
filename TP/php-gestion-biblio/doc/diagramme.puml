@@ -4,37 +4,50 @@
 abstract class Media{
     - string titre
     - int dureeEmprunt
+    + abstract getInformations()
 }
 
 class Livre{
 - string isbn
 - string auteur
 - int nbPage
++ getInformations()
 }
 
 class Magazine{
 - int numero
 - date datePublication
++ getInformations()
 }
 
 class BlueRay{
 - string realisateur
 - int annee
 - int duree
++ getInformations()
 }
 
 class Adherent{
-- int numAdherent
+- string numAdherent
 - string prenom
 - string nom
 - string email
 - date dateAdhesion
++ __contruct()
++ genererNumero()
++ renouvelerAdhesion()
++ getInformations()
++ adhesionEstValable()
 }
 
 class Emprunt{
 - date dateEmprunt
 - date dateRetourEstimee
 - date dateRetour
++ getInformations()
++ empruntEnCours()
++ empruntEnAlerte()
++ dureeMaxDepassee()
 }
 
 Media <|-- Livre
