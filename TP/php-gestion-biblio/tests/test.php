@@ -1,6 +1,6 @@
 <?php
 
-require "src/Adherent.php";
+require "../vendor/autoload.php";
 
 $ad = new Adherent("Esteban", "Racine", "esteban.racine@fpluriel.org", "07/10/2021");
 

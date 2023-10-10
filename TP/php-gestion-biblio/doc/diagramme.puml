@@ -3,7 +3,7 @@
 
 abstract class Media{
     - string titre
-    - int dureeEmprunt
+    - string dureeEmprunt
     + abstract getInformations()
 }
 
@@ -20,7 +20,7 @@ class Magazine{
 + getInformations()
 }
 
-class BlueRay{
+class BluRay{
 - string realisateur
 - int annee
 - int duree
@@ -52,7 +52,7 @@ class Emprunt{
 
 Media <|-- Livre
 Media <|-- Magazine
-Media <|-- BlueRay
+Media <|-- BluRay
 
 Emprunt "0..* "--> "1..1 " Media
 Adherent "1..1 "-->"0..* " Emprunt
