@@ -1,0 +1,9 @@
+{
+    "name": "racinee/php-gestion-biblio",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {}
+}
