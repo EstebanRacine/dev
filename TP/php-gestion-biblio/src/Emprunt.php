@@ -3,6 +3,7 @@
 class Emprunt
 {
     protected Media $media;
+    protected Adherent $adherent;
     protected DateTime $dateEmprunt;
     protected DateTime $dateRetourEstimee;
     protected DateTime|null $dateRetour;
@@ -12,8 +13,9 @@ class Emprunt
      * @param DateTime $dateRetourEstimee
      * @param DateTime $dateRetour
      */
-    public function __construct(Media $media)
+    public function __construct(Adherent $adherent, Media $media)
     {
+        $this->adherent = $adherent;
         $this->media = $media;
         $this->dateEmprunt = new DateTime("midnight");
         $nbJoursEmprunt = $this->media->getDureeEmprunt();
@@ -31,6 +33,7 @@ class Emprunt
 
     public function getInformations() : string{
         $result = "Media emprunté : ".PHP_EOL.PHP_EOL.$this->media->getInformations() .PHP_EOL.PHP_EOL.
+            "Adherent emprunteur : ".PHP_EOL.$this->adherent->getInformations().PHP_EOL.PHP_EOL.
             "Date d'emprunt : ".$this->dateEmprunt->format("d/m/Y").PHP_EOL.
             "Date de retour estimée : ".$this->dateRetourEstimee->format("d/m/Y").PHP_EOL;
         if ($this->dateRetour != null){

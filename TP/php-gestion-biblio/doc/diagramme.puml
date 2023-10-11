@@ -55,6 +55,6 @@ Media <|-- Magazine
 Media <|-- BluRay
 
 Emprunt "0..* "--> "1..1 " Media
-Adherent "1..1 "-->"0..* " Emprunt
+Adherent "1..1 "<--"0..* " Emprunt
 
 @enduml

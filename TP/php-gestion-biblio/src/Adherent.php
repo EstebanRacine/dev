@@ -8,10 +8,6 @@ class Adherent{
     protected string $nom;
     protected string $email;
     protected DateTime $dateAdhesion;
-    /**
-     * @var Emprunt[]
-     */
-    protected array $emprunts;
 
     /**
      * @param int $numAdherent
@@ -19,7 +15,6 @@ class Adherent{
      * @param string $nom
      * @param string $email
      * @param DateTime $dateAdhesion
-     * @param Emprunt[] $emprunts
      */
     public function __construct(string $prenom, string $nom, string $email, string $dateAdhesion = "now")
     {
@@ -32,7 +27,6 @@ class Adherent{
         }else{
             $this->dateAdhesion = date_create_from_format("d/m/Y H:i", $dateAdhesion." 00:00");
         }
-        $this->emprunts = [];
     }
 
     public function getNumAdherent(): string
@@ -60,14 +54,6 @@ class Adherent{
         return $this->dateAdhesion;
     }
 
-    public function getEmprunts(): array
-    {
-        return $this->emprunts;
-    }
-
-    public function addEmprunt(Emprunt $emprunt){
-        $this->emprunts[] = $emprunt;
-    }
 
     public function genererNumero():string{
         $result = "AD-";
