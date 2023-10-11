@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use \DateTime;
+
 class Magazine extends Media
 {
     protected int $numero;

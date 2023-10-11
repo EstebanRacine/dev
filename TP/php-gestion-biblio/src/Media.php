@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+
+use \DateTime;
+
 abstract class Media
 {
     protected string $titre;

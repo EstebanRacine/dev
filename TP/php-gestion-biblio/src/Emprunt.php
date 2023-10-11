@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use \DateTime;
+use \DateInterval;
+
 class Emprunt
 {
     protected Media $media;

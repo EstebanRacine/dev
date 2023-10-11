@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use \DateTime;
+use \DateInterval;
+
 require "Emprunt.php";
 
 class Adherent{
@@ -78,7 +83,8 @@ class Adherent{
 
     public function adhesionEstValable():bool{
         $dateActuelle = new DateTime("midnight");
-        if($this->dateAdhesion->getTimestamp() < $dateActuelle->getTimestamp()){
+        $dateFinAdhesion = $this->dateAdhesion->add(DateInterval::createFromDateString("1 year"));
+        if($dateFinAdhesion->getTimestamp() < $dateActuelle->getTimestamp()){
             return false;
         }
         return true;
