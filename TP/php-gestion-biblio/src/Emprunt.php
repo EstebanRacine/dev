@@ -18,15 +18,62 @@ class Emprunt
      * @param DateTime $dateRetourEstimee
      * @param DateTime $dateRetour
      */
-    public function __construct(Adherent $adherent, Media $media)
+    public function __construct(Adherent $adherent, Media $media, string $dateEmprunt = "now")
     {
         $this->adherent = $adherent;
         $this->media = $media;
-        $this->dateEmprunt = new DateTime("midnight");
+        if ($dateEmprunt == "now"){
+            $this->dateEmprunt = new DateTime("midnight");
+            $copieDateEmprunt = new DateTime("midnight");
+        }else{
+            $this->dateEmprunt = date_create_from_format("d/m/Y H:i", $dateEmprunt." 00:00");
+            $copieDateEmprunt = date_create_from_format("d/m/Y H:i", $dateEmprunt." 00:00");
+        }
         $nbJoursEmprunt = $this->media->getDureeEmprunt();
-        $this->dateRetourEstimee = $this->dateEmprunt->add(DateInterval::createFromDateString("$nbJoursEmprunt days"));
+        $this->dateRetourEstimee = $copieDateEmprunt->add(DateInterval::createFromDateString("$nbJoursEmprunt days"));
         $this->dateRetour = null;
     }
+
+    /**
+     * @return Media
+     */
+    public function getMedia(): Media
+    {
+        return $this->media;
+    }
+
+    /**
+     * @return Adherent
+     */
+    public function getAdherent(): Adherent
+    {
+        return $this->adherent;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateEmprunt(): DateTime
+    {
+        return $this->dateEmprunt;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateRetourEstimee(): DateTime
+    {
+        return $this->dateRetourEstimee;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getDateRetour(): ?DateTime
+    {
+        return $this->dateRetour;
+    }
+
 
     /**
      * @param DateTime $dateRetour
