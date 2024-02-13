@@ -13,3 +13,6 @@ Classe/Méthode abstraite = italique
 git add envoie fichier dans stage avant commit
 
 Héritage : Mecanisme qui permet de créer une classe à partir d'une autre pour éviter la duplication de code
+
+Hot Reloading => Page actualisée automatiquement
+Minification => Processus de suppression de tous les caractères inutiles du code source JavaScript sans altérer sa fonctionnalité

@@ -13,10 +13,12 @@ symfony console make:entity "nomEntité"			-->    Crée/Modifie une entité
 symfony console make:migration 				-->    Crée la migration
 symfony console doctrine:migration:migrate (d:m:m)	-->    Execute la migration (ajoute les entités dans phpMyAdmin)
 
+symfony console make:form				--> Crée un formulaire
+
 FIXTURES
 composer require orm-fixtures --dev		 	-->    Télécharge la dépendance des fixtures
 composer require fakerphp/faker --dev 			-->    Télécharge la dépendance des fakers
-symfony console make:fixtures "nom!Fixtures!" 		-->    Crée la fixture
+symfony console make:fixtures		 		-->    Crée la fixture (nom = nom de la class + Fixtures)
 implements DependentFixtureInterface -> function getDependencies return[nom!Fixtures!::class] --> gère ordre fictures
 $this->setReference/getReference 			-->    Genère des valeurs entre des fixtures
 symfony console doctrine:fixtures:load (d:f:l)		-->    Chargement des fixtures
@@ -46,6 +48,18 @@ git log 						-->    Historique des commits
 git add . 						-->    Ajoute tous les fichiers au commit
 git commit -m "nomCommit"				-->    Crée le commit
 git push 						-->    Envoie le commit sur le git
+
+API
+symfony console make:user				--> Crée une table de sécurité User
+symfony console lexik:jwt:generate-keypair		--> Genere les clés privées et publiques
+/!\ Utilisation de UserPasswordHasherInterface pour le hash de mdp
+/!\ Utilisation de lexik/jwt-authentication-bundle pour authentification
+/!\ Ordre Firewall hyper important
+
+
+
+SCHEMASPY
+java -jar schemaspy.jar -t mariadb -dp driver-mariaDB.jar -db db_bibliotheque -host localhost -port 3306 -s db_bibliotheque -u root -o ../siteSchemaSpy -vizjs
 
 ORDRE DE CRÉATION
 
